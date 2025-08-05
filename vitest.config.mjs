@@ -9,6 +9,14 @@ const testSnap = process.env.NODE_ENV === 'test-snap';
 export default mergeConfig(
   viteConfig({ mode: 'preview' }),
   defineConfig({
+    server: {
+      port: 5177,
+      watch: __dirname.startsWith('/Users') ? undefined : {
+        usePolling: true,
+        interval: 1000,
+        ignored: ['**/node_modules/**'], // 忽略 node_modules 目录
+      }
+    },
     test: {
       include:
         /**

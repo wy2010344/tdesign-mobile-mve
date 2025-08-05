@@ -91,10 +91,18 @@
     "@use-gesture/vanilla": "^10.3.0",
     "@vueuse/core": "10.7.0",
     "dayjs": "^1.10.7",
+    "history": "^5.3.0",
     "lodash-es": "^4.17.21",
+    "mve-core": "file:.yalc/mve-core",
+    "mve-dom": "file:.yalc/mve-dom",
+    "mve-dom-helper": "file:.yalc/mve-dom-helper",
+    "mve-helper": "file:.yalc/mve-helper",
+    "mve-icons": "file:.yalc/mve-icons",
     "tdesign-icons-vue-next": "^0.3.6",
     "tinycolor2": "^1.6.0",
-    "validator": "^13.5.1"
+    "validator": "^13.5.1",
+    "wy-dom-helper": "file:.yalc/wy-dom-helper",
+    "wy-helper": "file:.yalc/wy-helper"
   },
   "peerDependencies": {
     "vue": "^3.2.6"

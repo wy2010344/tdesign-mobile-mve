@@ -28,3 +28,5 @@ pnpm-lock.yaml
 
 Dockerfile
 robotMsg.json
+
+/site/mve-mobile/src/_common

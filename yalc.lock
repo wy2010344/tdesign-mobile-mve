@@ -1,0 +1,33 @@
+{
+  "version": "v1",
+  "packages": {
+    "wy-helper": {
+      "signature": "0774f2d11bd70fdf85869f6c86394e71",
+      "file": true
+    },
+    "wy-dom-helper": {
+      "signature": "5f67be4468b1ae98720d322de39d459c",
+      "file": true
+    },
+    "mve-core": {
+      "signature": "de10269acf9e4d4dd5e49f42cfa35bb4",
+      "file": true
+    },
+    "mve-dom": {
+      "signature": "3825b8ca580a02eb7785bc4ed0c53bc9",
+      "file": true
+    },
+    "mve-dom-helper": {
+      "signature": "0a630d36a70e518348e92af11ece0849",
+      "file": true
+    },
+    "mve-helper": {
+      "signature": "a69fb9de1e422bf916856ed8147cd376",
+      "file": true
+    },
+    "mve-icons": {
+      "signature": "a228066dd7a01af3af19dc3b2c227acd",
+      "file": true
+    }
+  }
+}

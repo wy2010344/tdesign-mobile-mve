@@ -46,6 +46,13 @@ export default ({ mode }) => {
       port: 18000,
       open: '/',
       https: false,
+      watch: __dirname.startsWith('/Users')
+        ? undefined
+        : {
+            usePolling: true,
+            interval: 1000,
+            ignored: ['**/node_modules/**'], // 忽略 node_modules 目录
+          },
     },
     build: {
       outDir: '../_site',
@@ -53,6 +60,7 @@ export default ({ mode }) => {
         input: {
           sites: 'index.html',
           mobile: 'mobile.html',
+          'mve-mobile': 'mve-mobile.html',
         },
       },
     },
