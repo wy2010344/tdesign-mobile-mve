@@ -1,46 +1,75 @@
 import { fdom } from 'mve-dom';
 import { Button } from '../index';
-import { createSignal } from 'wy-helper';
+import { css } from 'wy-dom-helper';
 
 export default function StatusDemo() {
-  const loading = createSignal(false);
-
   fdom.div({
-    className: 'demo-section',
+    className: s,
     children() {
       fdom.div({
-        className: 'demo-row',
+        className: 'row',
         children() {
           Button({
-            theme: 'primary',
+            size: 'large',
             disabled: true,
-            children: '禁用按钮',
+            theme: 'primary',
+            children: '填充按钮',
           });
-
           Button({
+            size: 'large',
+            disabled: true,
+            theme: 'light',
+            children: '填充按钮',
+          });
+          Button({
+            size: 'large',
+            disabled: true,
+            children: '填充按钮',
+          });
+        },
+      });
+
+      fdom.div({
+        className: 'row',
+        children() {
+          Button({
+            size: 'large',
+            disabled: true,
             theme: 'primary',
             variant: 'outline',
-            disabled: true,
-            children: '禁用按钮',
+            children: '描边按钮',
           });
-
           Button({
+            size: 'large',
+            disabled: true,
             theme: 'primary',
-            loading() {
-              return loading.get();
-            },
-            onClick() {
-              loading.set(true);
-              setTimeout(() => {
-                loading.set(false);
-              }, 2000);
-            },
-            children() {
-              return loading.get() ? '加载中...' : '点击加载';
-            },
+            variant: 'dashed',
+            children: '虚框按钮',
+          });
+          Button({
+            size: 'large',
+            disabled: true,
+            theme: 'primary',
+            variant: 'text',
+            children: '文字按钮',
           });
         },
       });
     },
   });
 }
+
+const s = css`
+  .row {
+    display: flex;
+    padding: 0 16px;
+  }
+
+  .row + .row {
+    margin-top: 16px;
+  }
+
+  .t-button + .t-button {
+    margin-left: 16px;
+  }
+`;

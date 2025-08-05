@@ -1,48 +1,48 @@
 import { fdom } from 'mve-dom';
 import { Loading } from '../index';
+// import { Slider } from '../../slider';
+import { css } from 'wy-dom-helper';
+import { createSignal } from 'wy-helper';
 
 export default function SpeedDemo() {
+  const loadingDuration = createSignal(5);
+
   fdom.div({
-    className: 'loading-demo--flex',
-    s_display: 'flex',
-    s_gap: '40px',
-    s_alignItems: 'center',
+    className: s,
     children() {
-      // 慢速
       fdom.div({
-        className: 'loading-demo__item',
-        s_textAlign: 'center',
+        className: 'loading-demo',
         children() {
           Loading({
-            duration: 1500,
-            text: '慢速',
+            duration: () => (1 / loadingDuration.get()) * 3000,
+            text: '加载中...',
           });
         },
       });
 
-      // 正常速度
       fdom.div({
-        className: 'loading-demo__item',
-        s_textAlign: 'center',
+        className: 'slider-wrap',
         children() {
-          Loading({
-            duration: 800,
-            text: '正常',
-          });
-        },
-      });
-
-      // 快速
-      fdom.div({
-        className: 'loading-demo__item',
-        s_textAlign: 'center',
-        children() {
-          Loading({
-            duration: 400,
-            text: '快速',
-          });
+          //   Slider({
+          //     value: loadingDuration,
+          //     min: 0,
+          //     max: 10,
+          //     label: false,
+          //   });
         },
       });
     },
   });
 }
+
+const s = css`
+  .loading-demo {
+    padding: 0 16px;
+  }
+
+  .slider-wrap {
+    width: 100%;
+    margin-top: 16px;
+    padding: 20px 0;
+  }
+`;

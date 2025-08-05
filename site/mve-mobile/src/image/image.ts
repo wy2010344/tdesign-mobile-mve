@@ -1,9 +1,9 @@
 import { fdom } from 'mve-dom';
-import { createSignal, valueOrGetToGet, emptyFun, run } from 'wy-helper';
+import { createSignal, valueOrGetToGet, emptyFun, run, addEffect } from 'wy-helper';
 import { Loading } from '../loading';
 import { TdClose } from 'mve-icons/td';
 import { TdImageProps } from './type';
-import { hookDestroy, renderIf, renderOne, renderOneP } from 'mve-helper';
+import { hookDestroy, hookTrackSignal, renderIf, renderOne, renderOneP } from 'mve-helper';
 import { TSvg } from '../../svg';
 import { usePrefixClass } from '../hooks/useClass';
 import { observerIntersection } from 'wy-dom-helper';
@@ -29,8 +29,8 @@ export function Image(props: TdImageProps) {
     position = 'center',
     referrerpolicy = '',
     fit = 'fill',
-    fallback: _fallback = '',
-    lazy: _lazy = false,
+    fallback = '',
+    lazy = false,
     shape: _shape = 'square',
     src: _src = '',
     alt,
@@ -44,29 +44,24 @@ export function Image(props: TdImageProps) {
   // 类名前缀
   const imageClass = usePrefixClass('image');
   // 转换为响应式getter函数 - 这是MVE的核心
-  const fallback = valueOrGetToGet(_fallback);
-  const lazy = valueOrGetToGet(_lazy);
   const shape = valueOrGetToGet(_shape);
   const src = valueOrGetToGet(_src);
   const isLoading = createSignal(true);
-  const isError = createSignal<'main' | 'fallback' | undefined>(undefined);
-  const isIntersecting = createSignal(false);
+  const isError = createSignal(false);
   const className = valueOrGetToGet(_className);
   // 图片状态管理
-  const realSrc = () => {
-    if (lazy() && !isIntersecting.get()) {
-      return '';
-    }
-    const s = src();
-    if (isError.get() == 'main') {
-      const fb = fallback();
-      if (fb == s) {
-        return '';
-      }
-      return fallback();
-    }
-    return s;
-  };
+  const realSrc = createSignal('');
+
+  hookTrackSignal(
+    () => {
+      return props.lazy ? '' : src();
+    },
+    function (src) {
+      addEffect(() => {
+        realSrc.set(src);
+      });
+    },
+  );
 
   return fdom.div({
     ...args,
@@ -82,8 +77,8 @@ export function Image(props: TdImageProps) {
       // 渲染遮罩层 - 统一的遮罩逻辑
       renderIf(
         () => {
-          if (isLoading.get() || isError.get() == 'fallback') {
-            if (lazy() && !realSrc()) {
+          if (isLoading.get() || isError.get()) {
+            if (lazy && !realSrc.get()) {
               return;
             }
             return true;
@@ -97,7 +92,7 @@ export function Image(props: TdImageProps) {
                 if (isLoading.get()) {
                   return loading;
                 }
-                if (isError.get() == 'fallback') {
+                if (isError.get()) {
                   return error;
                 }
                 return emptyFun;
@@ -125,7 +120,7 @@ export function Image(props: TdImageProps) {
             className: `${imageClass}__img`,
             s_objectFit: fit,
             s_objectPosition: position,
-            src: realSrc,
+            src: realSrc.get,
             alt: alt,
             referrerPolicy: referrerpolicy,
             onLoad(e) {
@@ -133,19 +128,25 @@ export function Image(props: TdImageProps) {
               onLoad?.({ e });
             },
             onError(e) {
-              if (realSrc() === '') {
+              if (realSrc.get() === '') {
                 return;
               }
               onError?.({ e });
               isLoading.set(false);
-              isError.set(realSrc() == src() ? 'main' : 'fallback');
+              isError.set(true);
+              if (props.fallback) {
+                realSrc.set(fallback);
+                isError.set(false);
+              }
             },
           });
 
           hookDestroy(
             observerIntersection(
-              function ([{ isIntersecting: _isIntersecting }]) {
-                isIntersecting.set(_isIntersecting);
+              function ([{ isIntersecting }]) {
+                if (isIntersecting && lazy) {
+                  realSrc.set(src());
+                }
               },
               img,
               {

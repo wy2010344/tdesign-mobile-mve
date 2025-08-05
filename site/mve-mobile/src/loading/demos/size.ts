@@ -1,24 +1,18 @@
 import { fdom } from 'mve-dom';
 import { Loading } from '../index';
+import { css } from 'wy-dom-helper';
 
 export default function SizeDemo() {
   fdom.div({
-    className: 'loading-demo',
+    className: s,
     children() {
-      // 大尺寸
       fdom.div({
-        className: 'loading-demo__item',
-        s_marginBottom: '24px',
+        className: 'loading-demo',
         children() {
           fdom.div({
-            className: 'loading-demo__summary',
-            s_marginBottom: '16px',
-            s_fontSize: '14px',
-            s_color: '#666',
-            childrenType: 'text',
+            className: 'loading-demo__summary mb-16',
             children: '大尺寸',
           });
-
           Loading({
             size: '26px',
             text: '加载中...',
@@ -26,20 +20,13 @@ export default function SizeDemo() {
         },
       });
 
-      // 中尺寸
       fdom.div({
-        className: 'loading-demo__item',
-        s_marginBottom: '24px',
+        className: 'loading-demo',
         children() {
           fdom.div({
-            className: 'loading-demo__summary',
-            s_marginBottom: '16px',
-            s_fontSize: '14px',
-            s_color: '#666',
-            childrenType: 'text',
+            className: 'loading-demo__summary mt-24 mb-16',
             children: '中尺寸',
           });
-
           Loading({
             size: '22px',
             text: '加载中...',
@@ -47,19 +34,13 @@ export default function SizeDemo() {
         },
       });
 
-      // 小尺寸
       fdom.div({
-        className: 'loading-demo__item',
+        className: 'loading-demo',
         children() {
           fdom.div({
-            className: 'loading-demo__summary',
-            s_marginBottom: '16px',
-            s_fontSize: '14px',
-            s_color: '#666',
-            childrenType: 'text',
+            className: 'loading-demo__summary mt-24 mb-16',
             children: '小尺寸',
           });
-
           Loading({
             size: '20px',
             text: '加载中...',
@@ -69,3 +50,23 @@ export default function SizeDemo() {
     },
   });
 }
+
+const s = css`
+  .loading-demo {
+    padding: 0 16px;
+  }
+
+  .loading-demo__summary {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 22px;
+  }
+
+  .mt-24 {
+    margin-top: 24px;
+  }
+
+  .mb-16 {
+    margin-bottom: 16px;
+  }
+`;

@@ -1,135 +1,106 @@
 import { fdom } from 'mve-dom';
 import { Image } from '../index';
 import { Loading } from '../../loading';
+import { css } from 'wy-dom-helper';
 
 export default function StatusDemo() {
   fdom.div({
-    className: 'image-status-demo',
+    className: s,
     children() {
-      // 第一行：加载状态
       fdom.div({
-        className: 'row',
-        s_display: 'flex',
-        s_gap: '20px',
-        s_marginBottom: '24px',
+        className: 'col',
         children() {
-          // 加载默认提示
-          fdom.div({
-            className: 'col',
-            s_textAlign: 'center',
-            children() {
-              fdom.p({
-                className: 'tips',
-                s_fontSize: '12px',
-                s_color: '#666',
-                s_marginBottom: '8px',
-                childrenType: 'text',
-                children: '加载默认提示',
-              });
-
-              Image({
-                className: 'image-container',
-                s_width: '72px',
-                s_height: '72px',
-                shape: 'round',
-                // 没有src，会显示默认加载状态
-              });
-            },
+          fdom.p({
+            className: 'tips',
+            children: '加载默认提示',
           });
-
-          // 加载自定义提示
-          fdom.div({
-            className: 'col',
-            s_textAlign: 'center',
-            children() {
-              fdom.p({
-                className: 'tips',
-                s_fontSize: '12px',
-                s_color: '#666',
-                s_marginBottom: '8px',
-                childrenType: 'text',
-                children: '加载自定义提示',
-              });
-
-              Image({
-                className: 'image-container',
-                s_width: '72px',
-                s_height: '72px',
-                shape: 'round',
-                loading() {
-                  Loading({
-                    theme: 'circular',
-                    size: '20px',
-                  });
-                },
-              });
-            },
+          Image({
+            className: 'image-container',
+            shape: 'round',
           });
         },
       });
 
-      // 第二行：失败状态
       fdom.div({
-        className: 'row',
-        s_display: 'flex',
-        s_gap: '20px',
+        className: 'col',
         children() {
-          // 失败默认提示
-          fdom.div({
-            className: 'col',
-            s_textAlign: 'center',
-            children() {
-              fdom.p({
-                className: 'tips',
-                s_fontSize: '12px',
-                s_color: '#666',
-                s_marginBottom: '8px',
-                childrenType: 'text',
-                children: '失败默认提示',
-              });
-
-              Image({
-                className: 'image-container',
-                style: { width: '72px', height: '72px' },
-                src: 'invalid-url',
-                shape: 'round',
-              });
-            },
+          fdom.p({
+            className: 'tips',
+            children: '加载自定义提示',
           });
+          Image({
+            className: 'image-container',
+            shape: 'round',
+            loading: () => Loading({}),
+          });
+        },
+      });
+    },
+  });
 
-          // 失败自定义提示
-          fdom.div({
-            className: 'col',
-            s_textAlign: 'center',
-            children() {
-              fdom.p({
-                className: 'tips',
-                s_fontSize: '12px',
-                s_color: '#666',
-                s_marginBottom: '8px',
-                childrenType: 'text',
-                children: '失败自定义提示',
-              });
+  fdom.div({
+    className: s,
+    children() {
+      fdom.div({
+        className: 'col',
+        children() {
+          fdom.p({
+            className: 'tips',
+            children: '失败默认提示',
+          });
+          Image({
+            className: 'image-container',
+            src: 'x',
+            shape: 'round',
+          });
+        },
+      });
 
-              Image({
-                className: 'image-container',
-                s_width: '72px',
-                s_height: '72px',
-                src: 'invalid-url',
-                shape: 'round',
-                error() {
-                  fdom.span({
-                    s_fontSize: '12px',
-                    s_color: '#999',
-                    childrenType: 'text',
-                    children: '加载失败',
-                  });
-                },
-              });
-            },
+      fdom.div({
+        className: 'col',
+        children() {
+          fdom.p({
+            className: 'tips',
+            children: '失败自定义提示',
+          });
+          Image({
+            className: 'image-container',
+            src: 'x',
+            shape: 'round',
+            error: () =>
+              fdom.div({
+                className: 'error-tips',
+                children: '加载失败',
+              }),
           });
         },
       });
     },
   });
 }
+
+const s = css`
+  display: flex;
+  grid-gap: 24px;
+  padding: 0 16px;
+  margin-bottom: 16px;
+
+  .image-container {
+    width: 72px;
+    height: 72px;
+  }
+
+  .tips {
+    color: var(--td-text-color-secondary, rgba(0, 0, 0, 0.6));
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .error-tips {
+    color: var(--td-text-color-placeholder, rgba(0, 0, 0, 0.4));
+    font-size: 10px;
+  }
+`;

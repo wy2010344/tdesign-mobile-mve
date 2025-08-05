@@ -13,7 +13,7 @@ function doDocs(docs: any[]) {
       doDocs(doc.children);
     } else {
       pages[`${doc.name}/index.ts`] = () => {
-        return import(`./src/${doc.name}/demos/index.ts`).then((out) => {
+        return import(`./src/${doc.name}/demos/mobile.ts`).then((out) => {
           return {
             default() {
               fdom.div({

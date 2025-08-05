@@ -1,0 +1,13 @@
+很好,再类似迁移下loading,原来引用图标
+```
+import { SearchIcon } from 'tdesign-icons-vue-next';
+const searchIcon = () => h(SearchIcon, { size: '24px' });
+```
+对应翻译为:
+```
+import {  TdSearch } from 'mve-icons/td';
+import { TSvg } from '../../../svg';
+const SearchIcon = () =>TdSearch(TSvg, {
+    size: '24px',
+});
+```

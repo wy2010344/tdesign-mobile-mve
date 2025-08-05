@@ -1,8 +1,10 @@
-import { fdom, mdom } from 'mve-dom';
+import { fdom, mdom, renderTextContent } from 'mve-dom';
 import { valueOrGetToGet } from 'wy-helper';
 import { AvatarProps } from './type';
 import { AvatarGroupContext } from './avatar-group';
-import { Badge } from '../badge/badge';
+import { Badge } from '../badge';
+import { cns } from 'mve-dom-helper';
+import { Image } from '../image';
 // 工具函数：判断是否为有效的预设尺寸
 function isValidSize(size: string): boolean {
   return ['small', 'medium', 'large'].includes(size);
@@ -16,7 +18,18 @@ function isValidSize(size: string): boolean {
  */
 export function Avatar(props: AvatarProps) {
   // 设置默认值 - 直接在解构中设置，类似Vue的props默认值
-  const { children, icon, badgeProps, imageProps, onError, ...args } = props;
+  const {
+    alt,
+    badgeProps,
+    hideOnLoadFailed = false,
+    image,
+    children,
+    imageProps,
+    onError,
+    icon,
+    childrenType,
+    ...args
+  } = props;
 
   // 类名前缀
   const avatarClass = 't-avatar';
@@ -25,33 +38,21 @@ export function Avatar(props: AvatarProps) {
   const avatarGroupProps = AvatarGroupContext.consume();
   const hasAvatarGroupProps = Object.keys(avatarGroupProps).length > 0;
 
-  // 转换为响应式getter函数 - 这是MVE的核心
-  const alt = valueOrGetToGet(props.alt || '');
-  const hideOnLoadFailed = valueOrGetToGet(props.hideOnLoadFailed || false);
-  const image = valueOrGetToGet(props.image || '');
   const shape = valueOrGetToGet(props.shape || avatarGroupProps.shape || 'circle');
   const size = valueOrGetToGet(props.size || avatarGroupProps.size || 'medium');
   // 计算是否为自定义尺寸
   const isCustomSize = () => !isValidSize(size());
 
-  // 图片加载错误处理
-  const handleImgLoadError = (e: Event) => {
-    onError?.({ e });
-  };
-
   // 渲染头像内容
   const renderAvatarContent = () => {
     // 如果有图片且不隐藏失败图片
-    if (image() && !hideOnLoadFailed()) {
+    if (image && !hideOnLoadFailed) {
       // 简化的图片渲染，实际项目中应该使用Image组件
-      fdom.img({
-        src: image(),
-        alt: alt(),
-        onError: handleImgLoadError,
-        s_width: '100%',
-        s_height: '100%',
-        s_objectFit: 'cover',
+      Image({
+        src: image,
+        alt,
         ...imageProps,
+        onError,
       });
       return;
     }
@@ -67,21 +68,16 @@ export function Avatar(props: AvatarProps) {
       return;
     }
 
-    // 渲染文字内容
-    if (children) {
-      if (typeof children === 'string') {
-        fdom.span({
-          childrenType: 'text',
-          children,
-        });
-      } else if (typeof children === 'function') {
-        children();
-      }
+    if (childrenType || typeof children != 'function') {
+      renderTextContent(children);
+    } else {
+      children?.();
     }
   };
 
   return fdom.div({
-    className: `${avatarClass}__wrapper`,
+    ...args,
+    className: cns(`${avatarClass}__wrapper`, args.className),
     children() {
       fdom.div({
         className: `${avatarClass}__badge`,

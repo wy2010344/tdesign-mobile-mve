@@ -4,9 +4,10 @@
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
 
+import { FPDomAttributes } from 'mve-dom';
 import { TNode } from '../common';
 
-export interface TdAvatarProps {
+export type TdAvatarProps = {
   /**
    * 头像替换文本，仅当图片加载失败时有效
    * @default ''
@@ -51,7 +52,7 @@ export interface TdAvatarProps {
    * 图片加载失败时触发
    */
   onError?: (context: { e: Event }) => void;
-}
+} & FPDomAttributes<'div'>;
 
 export interface TdAvatarGroupProps {
   /**
@@ -81,12 +82,6 @@ export interface TdAvatarGroupProps {
    */
   onCollapsedItemClick?: (context: { e: MouseEvent }) => void;
 }
-
-export interface AvatarProps extends TdAvatarProps {
-  className?: string;
-  style?: Record<string, any>;
-}
-
 export interface AvatarGroupProps extends TdAvatarGroupProps {
   className?: string;
   style?: Record<string, any>;

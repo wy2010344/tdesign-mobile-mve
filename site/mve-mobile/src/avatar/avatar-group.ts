@@ -24,7 +24,6 @@ export function AvatarGroup(props: AvatarGroupProps) {
 
   // 类名前缀
   const avatarGroupClass = 't-avatar-group';
-
   // 转换为响应式getter函数 - 这是MVE的核心
   const cascading = valueOrGetToGet(props.cascading || 'right-up');
   const max = valueOrGetToGet(props.max || 5);

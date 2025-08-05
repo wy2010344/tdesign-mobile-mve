@@ -3,14 +3,23 @@ import { cns } from 'mve-dom-helper';
 import { createBodyStyleTag } from 'wy-dom-helper';
 import { EmptyFun, emptyObject } from 'wy-helper';
 
-export function TSvg(attrs: { viewBox: string }, children: EmptyFun, other: FPSvgAttributes<'svg'> = emptyObject) {
-  fsvg.svg({
+export function TSvg(
+  attrs: { viewBox: string },
+  children: EmptyFun,
+  other: FPSvgAttributes<'svg'> & { size?: string } = emptyObject,
+) {
+  const o = {
     ...attrs,
     ...other,
     fill: 'currentColor',
     className: cns('t-icon', other.className),
     children,
-  });
+  };
+  if (other.size) {
+    delete o.size;
+    o.s_fontSize = other.size;
+  }
+  fsvg.svg(o);
 }
 
 const style = createBodyStyleTag();

@@ -1,22 +1,15 @@
 import { fdom } from 'mve-dom';
 import { Loading } from '../index';
+import { css } from 'wy-dom-helper';
 
 export default function BaseDemo() {
   fdom.div({
-    className: 'loading-demo--flex',
-    s_display: 'flex',
-    s_gap: '20px',
-    s_alignItems: 'center',
+    className: s,
     children() {
-      // 默认circular主题
       Loading({});
-
-      // spinner主题
       Loading({
         theme: 'spinner',
       });
-
-      // dots主题，自定义尺寸
       Loading({
         theme: 'dots',
         size: '40px',
@@ -24,3 +17,9 @@ export default function BaseDemo() {
     },
   });
 }
+
+const s = css`
+  .t-loading {
+    margin-right: 64px;
+  }
+`;

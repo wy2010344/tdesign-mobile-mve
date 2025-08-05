@@ -22,7 +22,7 @@ export type TdImageProps = {
    * 图片加载失败时，显示当前链接设置的图片地址。如果要使用组件图标或完全自定义加载失败时显示的内容，请更为使用 `error`
    * @default ''
    */
-  fallback?: ValueOrGet<string>;
+  fallback?: string;
   /**
    * 图片填充模式
    * @default fill
@@ -32,7 +32,7 @@ export type TdImageProps = {
    * 是否开启图片懒加载
    * @default false
    */
-  lazy?: ValueOrGet<boolean>;
+  lazy?: boolean;
   /**
    * 自定义加载中状态的图片内容，如："加载中"
    */

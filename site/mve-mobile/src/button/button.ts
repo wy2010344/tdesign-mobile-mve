@@ -1,10 +1,11 @@
-import { fdom, FPDomAttributes } from 'mve-dom';
+import { fdom } from 'mve-dom';
 import { createSignal, mergeSet, valueOrGetToGet } from 'wy-helper';
 import pluginHover from '../hooks/useHover';
 import { getFormIsDisabled } from '../form';
-import { renderIf } from 'mve-helper';
+import { renderIfP } from 'mve-helper';
 import { ButtonProps } from './type';
 import { Loading } from '../loading';
+import { usePrefixClass } from '../hooks/useClass';
 /**
  * Button 按钮组件
  * 按钮用于开启一个闭环的操作任务，如"删除"对象、"购买"商品等。
@@ -13,22 +14,38 @@ import { Loading } from '../loading';
  */
 export function Button(props: ButtonProps) {
   // 设置默认值 - 直接在解构中设置，类似Vue的props默认值
-  const { icon, loadingProps, suffix, onClick, ...args } = props;
+  const {
+    icon,
+    loadingProps,
+    suffix,
+    onClick,
+    disabled: _disabled,
+    loading: _loading = false,
+    size: _size = 'medium',
+    shape: _shape = 'rectangle',
+    theme: _theme = 'default',
+    variant: _variant = 'base',
+    block: _block = false,
+    ghost: _ghost = false,
+    childrenType,
+    children,
+    ...args
+  } = props;
   // 类名前缀 - 在MVE中直接使用字符串，类似Vue
-  const buttonClass = 't-button';
+  const buttonClass = usePrefixClass('button');
 
   const hover = createSignal(false);
-  const disabled = getFormIsDisabled(props.disabled);
-  const loading = valueOrGetToGet(props.loading || false);
-  const size = valueOrGetToGet(props.size || 'medium');
-  const shape = valueOrGetToGet(props.shape || 'rectangle');
-  const theme = valueOrGetToGet(props.theme || 'default');
-  const variant = valueOrGetToGet(props.variant || 'base');
-  const block = valueOrGetToGet(props.block || false);
-  const ghost = valueOrGetToGet(props.ghost || false);
+  const disabled = getFormIsDisabled(_disabled);
+  const loading = valueOrGetToGet(_loading);
+  const size = valueOrGetToGet(_size);
+  const shape = valueOrGetToGet(_shape);
+  const theme = valueOrGetToGet(_theme);
+  const variant = valueOrGetToGet(_variant);
+  const block = valueOrGetToGet(_block);
+  const ghost = valueOrGetToGet(_ghost);
   const className = valueOrGetToGet(props.className);
   return fdom.button({
-    ...(args as FPDomAttributes<'button'>),
+    ...args,
     // type,
     // className必须是函数，这样才能建立响应式绑定 - 这是MVE的核心思维
     className() {
@@ -70,10 +87,11 @@ export function Button(props: ButtonProps) {
         e.stopPropagation();
       }
     },
+    aria_disabled: disabled,
     disabled,
     children() {
-      renderIf(
-        props.loading,
+      renderIfP(
+        _loading,
         function () {
           Loading({
             inheritColor: true,
@@ -83,11 +101,11 @@ export function Button(props: ButtonProps) {
         icon,
       );
       // 渲染按钮内容
-      if (props.children) {
+      if (children) {
         fdom.span({
           className: `${buttonClass}__content`,
-          childrenType: props.childrenType,
-          children: props.children,
+          childrenType: childrenType,
+          children: children,
         } as any);
       }
 
