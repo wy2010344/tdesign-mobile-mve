@@ -2,18 +2,19 @@ import { fdom } from 'mve-dom';
 import { createSignal, valueOrGetToGet, emptyFun, run, addEffect } from 'wy-helper';
 import { Loading } from '../loading';
 import { TdClose } from 'mve-icons/td';
-import { TdImageProps } from './type';
+import { ImageProps } from './type';
 import { hookDestroy, hookTrackSignal, renderIf, renderOne, renderOneP } from 'mve-helper';
 import { TSvg } from '../../svg';
 import { usePrefixClass } from '../hooks/useClass';
 import { observerIntersection } from 'wy-dom-helper';
+import { renderTNode } from '../_util/parseTNode';
 /**
  * Image 图片组件 (改进版 - 基于Vue版本的严谨实现)
  * 用于展示图片素材
  *
  * 按照MVE思维模式实现，参考Vue版本的严谨做法
  */
-export function Image(props: TdImageProps) {
+export function Image(props: ImageProps) {
   // 设置默认值 - 直接在解构中设置，类似Vue的props默认值
   const {
     error = () =>
@@ -54,7 +55,7 @@ export function Image(props: TdImageProps) {
 
   hookTrackSignal(
     () => {
-      return props.lazy ? '' : src();
+      return props.lazy ? '' : src() || '';
     },
     function (src) {
       addEffect(() => {
@@ -95,8 +96,7 @@ export function Image(props: TdImageProps) {
                 if (isError.get()) {
                   return error;
                 }
-                return emptyFun;
-              }, run);
+              }, renderTNode);
             },
           });
         },
@@ -145,7 +145,7 @@ export function Image(props: TdImageProps) {
             observerIntersection(
               function ([{ isIntersecting }]) {
                 if (isIntersecting && lazy) {
-                  realSrc.set(src());
+                  realSrc.set(src() || '');
                 }
               },
               img,

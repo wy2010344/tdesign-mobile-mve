@@ -25,13 +25,14 @@ export default function ExhibitionDemo() {
           AvatarGroup({
             cascading: 'left-up',
             max: 5,
-            children() {
-              imageList.forEach((url, index) => {
-                Avatar({
-                  key: index,
-                  shape: 'circle',
-                  image: url,
-                });
+            count: imageList.length,
+            getKeyAt(i) {
+              return imageList[i];
+            },
+            renderChildOf(getIndex, key) {
+              Avatar({
+                shape: 'circle',
+                image: key,
               });
             },
           });

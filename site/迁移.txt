@@ -1,0 +1,37 @@
+我clone了tdesign-mobile-react,希望将tdesign-mobile组件库的代码迁移到我的mve框架
+我准备了
+1.mve的简单文档:/Volumes/移动硬盘/Users/wangyang/Documents/github/mve/docs
+2.mve的简单demo:/Volumes/移动硬盘/Users/wangyang/Documents/github/mve/demo/src
+3.更多mve的demo:
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/mve-vite-demo
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/verify-app
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/chat-note/client
+4.tdesign-mobile-vue的最新源码本地位置:
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/tdesign-mobile-vue/src
+5.tdesign-mobile-react的最新源码本地位置:
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/tdesign-mobile-react/src
+6.如果遇到调用tdesign-icons-react,比如ChevronLeftIcon
+使用:
+```
+import { TdChevronLeft } from 'mve-icons/td';
+...
+//调用组件:
+TdChevronLeft(TSvg, {
+    className: 'tdesign-demo-topnav__back',
+    onClick() {
+    router.back();
+    },
+});
+```
+7.输出目录:
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/tdesign-mobile-react/site/mobile/src
+咱们先试试迁移button这个组件,包括文档与demos
+
+
+你老是给我生成一个完整项目
+我希望只对目录内进行迁移,因为外围架构我已经写好.
+现在在我人修改下,你迁移的button/loading基本也可以执行.
+现在我希望你仿照着它们再迁移avatar,记得多参考vue/react,vue的源码为了方便你查找我也放到vue-src里了.
+
+
+不需要你写MIGRATION,但要迁移style目录

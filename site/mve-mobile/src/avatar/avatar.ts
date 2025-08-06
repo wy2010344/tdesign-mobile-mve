@@ -1,10 +1,12 @@
-import { fdom, mdom, renderTextContent } from 'mve-dom';
+import { fdom, mdom } from 'mve-dom';
 import { valueOrGetToGet } from 'wy-helper';
 import { AvatarProps } from './type';
 import { AvatarGroupContext } from './avatar-group';
 import { Badge } from '../badge';
 import { cns } from 'mve-dom-helper';
 import { Image } from '../image';
+import { renderTNode } from '../_util/parseTNode';
+import { renderOne } from 'mve-helper';
 // 工具函数：判断是否为有效的预设尺寸
 function isValidSize(size: string): boolean {
   return ['small', 'medium', 'large'].includes(size);
@@ -16,63 +18,70 @@ function isValidSize(size: string): boolean {
  *
  * 按照MVE思维模式实现，更接近Vue的响应式模式
  */
-export function Avatar(props: AvatarProps) {
-  // 设置默认值 - 直接在解构中设置，类似Vue的props默认值
-  const {
-    alt,
-    badgeProps,
-    hideOnLoadFailed = false,
-    image,
-    children,
-    imageProps,
-    onError,
-    icon,
-    childrenType,
-    ...args
-  } = props;
-
+export function Avatar({
+  alt,
+  badgeProps,
+  hideOnLoadFailed: _hideOnLoadFailed = false,
+  image: _image,
+  icon,
+  children,
+  imageProps,
+  onError,
+  shape: _shape,
+  size: _size,
+  ...args
+}: AvatarProps) {
   // 类名前缀
   const avatarClass = 't-avatar';
 
   // 获取AvatarGroup的Context
   const avatarGroupProps = AvatarGroupContext.consume();
-  const hasAvatarGroupProps = Object.keys(avatarGroupProps).length > 0;
+  const dShape = valueOrGetToGet(_shape);
+  const image = valueOrGetToGet(_image);
+  const hideOnLoadFailed = valueOrGetToGet(_hideOnLoadFailed);
 
-  const shape = valueOrGetToGet(props.shape || avatarGroupProps.shape || 'circle');
-  const size = valueOrGetToGet(props.size || avatarGroupProps.size || 'medium');
+  const shape = () => {
+    return dShape() || avatarGroupProps?.shape() || 'circle';
+  };
+  const dSize = valueOrGetToGet(_size);
+  const size = () => {
+    return dSize() || avatarGroupProps?.size() || 'medium';
+  };
   // 计算是否为自定义尺寸
   const isCustomSize = () => !isValidSize(size());
 
   // 渲染头像内容
   const renderAvatarContent = () => {
     // 如果有图片且不隐藏失败图片
-    if (image && !hideOnLoadFailed) {
-      // 简化的图片渲染，实际项目中应该使用Image组件
+    function ShowImg() {
       Image({
         src: image,
         alt,
         ...imageProps,
         onError,
       });
-      return;
     }
-
-    // 如果有图标
-    if (icon) {
+    function ShowIcon() {
       fdom.div({
         className: `${avatarClass}__icon`,
-        children() {
-          icon();
-        },
+        children: icon,
       });
-      return;
     }
-
-    if (childrenType || typeof children != 'function') {
-      renderTextContent(children);
-    } else {
-      children?.();
-    }
+    renderOne(
+      () => {
+        const img = image();
+        if (img && !hideOnLoadFailed()) {
+          return ShowImg;
+        }
+        if (icon != undefined) {
+          return ShowIcon;
+        }
+        return children;
+      },
+      (e) => {
+        renderTNode(e);
+      },
+    );
   };
 
   return fdom.div({
@@ -98,7 +107,7 @@ export function Avatar(props: AvatarProps) {
                   ];
 
                   // 如果在AvatarGroup中，添加边框样式
-                  if (hasAvatarGroupProps) {
+                  if (avatarGroupProps) {
                     classes.push(`${avatarClass}--border`);
                     classes.push(`${avatarClass}--border-${isCustomSize() ? 'medium' : currentSize}`);
                   }

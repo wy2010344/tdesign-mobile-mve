@@ -6,31 +6,29 @@ import { renderIfP } from 'mve-helper';
 import { ButtonProps } from './type';
 import { Loading } from '../loading';
 import { usePrefixClass } from '../hooks/useClass';
+import { renderTNode } from '../_util/parseTNode';
 /**
  * Button 按钮组件
  * 按钮用于开启一个闭环的操作任务，如"删除"对象、"购买"商品等。
  *
  * 这是按照MVE思维模式的实现，更接近Vue的响应式模式
  */
-export function Button(props: ButtonProps) {
-  // 设置默认值 - 直接在解构中设置，类似Vue的props默认值
-  const {
-    icon,
-    loadingProps,
-    suffix,
-    onClick,
-    disabled: _disabled,
-    loading: _loading = false,
-    size: _size = 'medium',
-    shape: _shape = 'rectangle',
-    theme: _theme = 'default',
-    variant: _variant = 'base',
-    block: _block = false,
-    ghost: _ghost = false,
-    childrenType,
-    children,
-    ...args
-  } = props;
+export function Button({
+  icon,
+  loadingProps,
+  suffix,
+  onClick,
+  disabled: _disabled,
+  loading: _loading = false,
+  size: _size = 'medium',
+  shape: _shape = 'rectangle',
+  theme: _theme = 'default',
+  variant: _variant = 'base',
+  block: _block = false,
+  ghost: _ghost = false,
+  children,
+  ...args
+}: ButtonProps) {
   // 类名前缀 - 在MVE中直接使用字符串，类似Vue
   const buttonClass = usePrefixClass('button');
 
@@ -43,7 +41,7 @@ export function Button(props: ButtonProps) {
   const variant = valueOrGetToGet(_variant);
   const block = valueOrGetToGet(_block);
   const ghost = valueOrGetToGet(_ghost);
-  const className = valueOrGetToGet(props.className);
+  const className = valueOrGetToGet(args.className);
   return fdom.button({
     ...args,
     // type,
@@ -98,19 +96,20 @@ export function Button(props: ButtonProps) {
             ...loadingProps,
           });
         },
-        icon,
+        () => {
+          renderTNode(icon);
+        },
       );
       // 渲染按钮内容
       if (children) {
         fdom.span({
           className: `${buttonClass}__content`,
-          childrenType: childrenType,
           children: children,
-        } as any);
+        });
       }
 
       // 渲染后缀图标
-      suffix?.();
+      renderTNode(suffix);
     },
   });
 }

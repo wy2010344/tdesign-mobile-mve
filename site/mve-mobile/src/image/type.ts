@@ -1,14 +1,13 @@
-/* eslint-disable */
-
 /**
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
-import { EmptyFun, ValueOrGet } from 'wy-helper';
+import { ValueOrGet } from 'wy-helper';
 import { Property } from 'csstype';
 import { FPDomAttributes } from 'mve-dom';
 import { React } from 'wy-dom-helper';
+import { TNode } from '../common';
 
-export type TdImageProps = {
+export type ImageProps = {
   /**
    * 图片描述
    * @default ''
@@ -17,7 +16,7 @@ export type TdImageProps = {
   /**
    * 自定义图片加载失败状态下的显示内容
    */
-  error?: EmptyFun;
+  error?: TNode;
   /**
    * 图片加载失败时，显示当前链接设置的图片地址。如果要使用组件图标或完全自定义加载失败时显示的内容，请更为使用 `error`
    * @default ''
@@ -36,7 +35,7 @@ export type TdImageProps = {
   /**
    * 自定义加载中状态的图片内容，如："加载中"
    */
-  loading?: EmptyFun;
+  loading?: TNode;
   /**
    * 等同于原生的 object-position 属性，可选值为 top right bottom left 或 string，可以自定义任何单位，px 或者 百分比
    * @default center
@@ -55,7 +54,7 @@ export type TdImageProps = {
    * 图片链接
    * @default ''
    */
-  src?: ValueOrGet<string>;
+  src?: ValueOrGet<string | undefined>;
   /**
    * 图片链接集合，用于支持特殊格式的图片，如 `.avif` 和 `.webp`。会优先加载 `srcset` 中的图片格式，浏览器不支持的情况下，加载 `src` 设置的图片地址
    */

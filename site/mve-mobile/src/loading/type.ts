@@ -1,6 +1,8 @@
 /* eslint-disable */
 
 import { EmptyFun, ValueOrGet } from 'wy-helper';
+import { TNode } from '../common';
+import { FPDomAttributes } from 'mve-dom';
 
 /**
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
@@ -14,7 +16,7 @@ export interface TdLoadingProps {
   /**
    * 子元素
    */
-  children?(): void;
+  children?: TNode;
   /**
    * 延迟显示加载效果的时间，用于防止请求速度过快引起的加载闪烁，单位：毫秒
    * @default 0
@@ -56,11 +58,6 @@ export interface TdLoadingProps {
    */
   pause?: ValueOrGet<boolean>;
   /**
-   * 防止滚动穿透，全屏加载模式有效
-   * @default true
-   */
-  preventScrollThrough?: boolean;
-  /**
    * 加载动画是否反向
    */
   reverse?: ValueOrGet<boolean>;
@@ -80,4 +77,4 @@ export interface TdLoadingProps {
   theme?: ValueOrGet<'circular' | 'spinner' | 'dots'>;
 }
 
-export type LoadingProps = TdLoadingProps;
+export type LoadingProps = TdLoadingProps & FPDomAttributes<'div'>;

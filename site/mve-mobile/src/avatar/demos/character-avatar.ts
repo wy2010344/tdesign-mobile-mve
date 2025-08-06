@@ -11,7 +11,7 @@ export default function CharacterAvatarDemo() {
         children() {
           Avatar({
             className: 'avatar-example external-class-content',
-            'aria-label': '字符头像',
+            aria_label: '字符头像',
             children: 'A',
           });
           Avatar({

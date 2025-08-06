@@ -1,7 +1,8 @@
-import { fdom, FPDomAttributes, mdom } from 'mve-dom';
+import { fdom, mdom } from 'mve-dom';
 import { valueOrGetToGet, memo } from 'wy-helper';
 import { renderIf } from 'mve-helper';
-import { TdBadgeProps } from './type';
+import { BadgeProps } from './type';
+import { renderTNode } from '../_util/parseTNode';
 // 工具函数：判断是否包含单位
 function hasUnit(unit: string): boolean {
   return (
@@ -42,9 +43,8 @@ export function Badge({
   size: _size = 'medium',
   className: _className,
   children,
-  childrenType,
   ...args
-}: TdBadgeProps) {
+}: BadgeProps) {
   // 设置默认值 - 直接在解构中设置，类似Vue的props默认值
 
   // 类名前缀
@@ -90,19 +90,6 @@ export function Badge({
     }
     return currentCount;
   });
-
-  // 渲染内容
-  const renderContent = (node: HTMLDivElement) => {
-    if (childrenType || typeof children != 'function') {
-      fdom.span({
-        className: `${badgeClass}__content-text`,
-        childrenType: childrenType,
-        children: children,
-      } as any);
-    } else {
-      children?.(node);
-    }
-  };
 
   // 渲染徽标
   const renderBadge = () => {
@@ -159,7 +146,14 @@ export function Badge({
     children() {
       fdom.div({
         className: `${badgeClass}__content`,
-        children: renderContent,
+        children() {
+          renderTNode(children, function (children) {
+            fdom.span({
+              className: `${badgeClass}__content-text`,
+              children: children,
+            });
+          });
+        },
       });
 
       renderBadge();

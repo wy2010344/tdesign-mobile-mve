@@ -4,9 +4,9 @@
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
 import { FPDomAttributes } from 'mve-dom';
-import { FGetChildAttr } from 'wy-dom-helper';
 import { ValueOrGet } from 'wy-helper';
-export type TdBadgeProps = {
+import { TNode } from '../common';
+export type BadgeProps = {
   /**
    * 颜色
    * @default ''
@@ -46,5 +46,5 @@ export type TdBadgeProps = {
    * @default medium
    */
   size?: ValueOrGet<'medium' | 'large'>;
-} & FPDomAttributes<'div'> &
-  FGetChildAttr<HTMLDivElement>;
+  children?: TNode;
+} & FPDomAttributes<'div'>;

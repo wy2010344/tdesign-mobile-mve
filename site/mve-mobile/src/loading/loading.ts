@@ -2,34 +2,46 @@ import { fdom, renderPortal } from 'mve-dom';
 import { addEffect, createSignal, memo, valueOrGetToGet } from 'wy-helper';
 import { hookTrackSignal, renderIf, renderOne, renderOneP } from 'mve-helper';
 import { LoadingProps } from './type';
-import { FStyleProps } from 'wy-dom-helper';
-import { OrFun } from 'mve-core';
 import dots from './icon/dots';
 import circular from './icon/circular';
 import spinner from './icon/spinner';
+import { renderTNode } from '../_util/parseTNode';
+import { usePrefixClass } from '../hooks/useClass';
 /**
  * Loading 加载组件
  * 用于表示页面或操作的加载状态，给予用户反馈的同时减缓等待的焦虑感
  *
- * 按照MVE思维模式实现，更接近Vue的响应式模式
  */
-export function Loading(props: LoadingProps) {
-  // 设置默认值 - 直接在解构中设置，类似Vue的props默认值
-  const { children, text, indicator = true, theme = 'circular', size = '20px', ...args } = props;
-
+export function Loading({
+  attach: _attach,
+  delay = 0,
+  duration: _duration = 800,
+  fullscreen: _fullscreen = false,
+  inheritColor: _inheritColor = false,
+  layout: _layout = 'horizontal',
+  pause: _pause = false,
+  reverse: _reverse = false,
+  loading: _loading = true,
+  children,
+  text,
+  indicator = true,
+  theme = 'circular',
+  size = '20px',
+  ...args
+}: LoadingProps) {
   // 类名前缀
-  const loadingClass = 't-loading';
+  const loadingClass = usePrefixClass('loading');
 
   // 转换为响应式getter函数
-  const attach = valueOrGetToGet(props.attach);
-  const delay = valueOrGetToGet(props.delay || 0);
-  const duration = valueOrGetToGet(props.duration || 800);
-  const fullscreen = valueOrGetToGet(props.fullscreen || false);
-  const inheritColor = valueOrGetToGet(props.inheritColor || false);
-  const layout = valueOrGetToGet(props.layout || 'horizontal');
-  const loading = valueOrGetToGet(props.loading !== undefined ? props.loading : true);
-  const pause = valueOrGetToGet(props.pause || false);
-  const reverse = valueOrGetToGet(props.reverse || false);
+  const attach = valueOrGetToGet(_attach);
+  const duration = valueOrGetToGet(_duration);
+  const fullscreen = valueOrGetToGet(_fullscreen);
+  const inheritColor = valueOrGetToGet(_inheritColor);
+  const layout = valueOrGetToGet(_layout);
+  const loading = valueOrGetToGet(_loading);
+  const pause = valueOrGetToGet(_pause);
+  const reverse = valueOrGetToGet(_reverse);
+  const className = valueOrGetToGet(args.className);
   const delayShowLoading = createSignal(false);
   function countDelay() {
     addEffect(() => {
@@ -37,14 +49,14 @@ export function Loading(props: LoadingProps) {
       const timer = setTimeout(() => {
         delayShowLoading.set(true);
         clearTimeout(timer);
-      }, props.delay);
+      }, delay);
     });
   }
-  const realLoading = memo(() => (!delay() || delayShowLoading.get()) && loading());
+  const realLoading = () => (!delay || delayShowLoading.get()) && loading();
   // 监听loading和delay变化
   hookTrackSignal(loading, (value) => {
     if (value) {
-      props.delay && countDelay();
+      delay && countDelay();
     }
     const cls = `${loadingClass}--lock`;
     if (value && fullscreen()) {
@@ -55,32 +67,12 @@ export function Loading(props: LoadingProps) {
     }
   });
 
-  const rootClass = memo(() => {
-    const classes: string[] = [loadingClass];
-    if (layout() == 'vertical') {
-      classes.push(`${loadingClass}--vertical`);
-    }
-    if (fullscreen()) {
-      classes.push(`${loadingClass}--fullscreen`);
-    }
-    if (!fullscreen() && attach()) {
-      classes.push(`${loadingClass}--full`);
-    }
-    return classes.join(' ');
-  });
-
-  const textClass = memo(() => {
+  const textClass = () => {
     const classes: string[] = [`${loadingClass}__text`];
-    if (props.indicator) {
+    if (indicator) {
       classes.push(`${loadingClass}__text--only`);
     }
     return classes.join(' ');
-  });
-  const rootStyle: OrFun<FStyleProps> = {
-    s_color() {
-      return inheritColor() ? 'inherit' : '';
-    },
-    s_fontSize: size,
   };
 
   const map = {
@@ -101,8 +93,28 @@ export function Loading(props: LoadingProps) {
   // 渲染加载内容
   const renderContent = () => {
     fdom.div({
-      className: rootClass,
-      ...rootStyle,
+      ...args,
+      className() {
+        const classes: string[] = [loadingClass];
+        if (layout() == 'vertical') {
+          classes.push(`${loadingClass}--vertical`);
+        }
+        if (fullscreen()) {
+          classes.push(`${loadingClass}--fullscreen`);
+        }
+        if (!fullscreen() && attach()) {
+          classes.push(`${loadingClass}--full`);
+        }
+        const n = className();
+        if (n) {
+          classes.push(n);
+        }
+        return classes.join(' ');
+      },
+      s_color() {
+        return inheritColor() ? 'inherit' : '';
+      },
+      s_fontSize: size,
       children() {
         renderIf(realLoading, function () {
           if (typeof indicator == 'function') {
@@ -117,7 +129,7 @@ export function Loading(props: LoadingProps) {
               children: text,
             });
           }
-          props.children?.();
+          renderTNode(children);
         });
       },
     });

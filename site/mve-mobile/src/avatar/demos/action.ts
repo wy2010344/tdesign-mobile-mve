@@ -29,13 +29,16 @@ export default function ActionDemo() {
           AvatarGroup({
             max: 5,
             collapseAvatar: () => UserAddIcon(),
-            children() {
-              imageList.forEach((url, index) => {
-                Avatar({
-                  key: index,
-                  shape: 'circle',
-                  image: url,
-                });
+            count: imageList.length,
+            getKeyAt(i) {
+              return i;
+            },
+            renderChildOf(getIndex, key) {
+              Avatar({
+                shape: 'circle',
+                image() {
+                  return imageList[getIndex()];
+                },
               });
             },
           });

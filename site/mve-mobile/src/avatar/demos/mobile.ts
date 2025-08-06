@@ -7,11 +7,11 @@ import ExhibitionDemo from './exhibition';
 import ActionDemo from './action';
 import SizeDemo from './size';
 import demoBlock from '../../../demo-block';
-import { css } from 'wy-dom-helper';
+import { cns, css } from 'wy-dom-helper';
 
 export default function AvatarDemos() {
   fdom.div({
-    className: s,
+    className: cns(s, 'tdesign-mobile-demo'),
     children() {
       fdom.h1({
         className: 'title',
