@@ -8,8 +8,6 @@
     /Volumes/移动硬盘/Users/wangyang/Documents/github/chat-note/client
 4.tdesign-mobile-vue的最新源码本地位置:
     /Volumes/移动硬盘/Users/wangyang/Documents/github/tdesign-mobile-vue/src
-5.tdesign-mobile-react的最新源码本地位置:
-    /Volumes/移动硬盘/Users/wangyang/Documents/github/tdesign-mobile-react/src
 6.如果遇到调用tdesign-icons-react,比如ChevronLeftIcon
 使用:
 ```
@@ -24,7 +22,7 @@ TdChevronLeft(TSvg, {
 });
 ```
 7.输出目录:
-    /Volumes/移动硬盘/Users/wangyang/Documents/github/tdesign-mobile-react/site/mobile/src
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/tdesign-mobile-react/site/mve-mobile/src
 咱们先试试迁移button这个组件,包括文档与demos
 
 
@@ -35,3 +33,18 @@ TdChevronLeft(TSvg, {
 
 
 不需要你写MIGRATION,但要迁移style目录
+
+
+我已经大约迁移了button/badge/image/loading/avatar等几个组件
+你仿照着参照一下,迁移模块Cell.如果有外部依赖,递归迁移外部依赖模块.
+
+我准备了
+1.mve的简单文档:/Volumes/移动硬盘/Users/wangyang/Documents/github/mve/docs
+2.mve的简单demo:/Volumes/移动硬盘/Users/wangyang/Documents/github/mve/demo/src
+3.更多mve的demo:
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/mve-vite-demo
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/verify-app
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/chat-note/client
+4.输出目录:
+    /Volumes/移动硬盘/Users/wangyang/Documents/github/tdesign-mobile-react/site/mve-mobile/src
+有不清楚的或歧义,可以询问再操作

@@ -1,10 +1,12 @@
 import { FPSvgAttributes, fsvg } from 'mve-dom';
 import { cns } from 'mve-dom-helper';
+import { IconInfo, SvgAttrInfo } from 'mve-icons';
 import { createBodyStyleTag } from 'wy-dom-helper';
 import { EmptyFun, emptyObject } from 'wy-helper';
 
 export function TSvg(
-  attrs: { viewBox: string },
+  fun: IconInfo,
+  attrs: SvgAttrInfo,
   children: EmptyFun,
   other: FPSvgAttributes<'svg'> & { size?: string } = emptyObject,
 ) {
@@ -12,7 +14,7 @@ export function TSvg(
     ...attrs,
     ...other,
     fill: 'currentColor',
-    className: cns('t-icon', other.className),
+    className: cns('t-icon', `t-icon-${fun.iconName}`, other.className),
     children,
   };
   if (other.size) {

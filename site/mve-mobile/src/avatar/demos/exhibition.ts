@@ -25,16 +25,12 @@ export default function ExhibitionDemo() {
           AvatarGroup({
             cascading: 'left-up',
             max: 5,
-            count: imageList.length,
-            getKeyAt(i) {
-              return imageList[i];
-            },
-            renderChildOf(getIndex, key) {
-              Avatar({
+            children: imageList.map((image) => {
+              return {
                 shape: 'circle',
-                image: key,
-              });
-            },
+                image,
+              };
+            }),
           });
         },
       });

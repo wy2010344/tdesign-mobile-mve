@@ -1,7 +1,7 @@
 import { hookDestroy } from 'mve-helper';
 import { StoreRef } from 'wy-helper';
 
-function pluginHover(hover: StoreRef<boolean>) {
+function pluginTouchHover(hover: StoreRef<boolean>) {
   const startTime = 50;
   const stayTime = 70;
 
@@ -30,4 +30,4 @@ function pluginHover(hover: StoreRef<boolean>) {
   };
 }
 
-export default pluginHover;
+export default pluginTouchHover;

@@ -27,9 +27,7 @@ const ext = Symbol('ext');
  * 按照MVE思维模式实现，更接近Vue的响应式模式
  */
 export function AvatarGroup({
-  count: _count,
-  renderChildOf,
-  getKeyAt,
+  children: _children,
   collapseAvatar,
   onCollapsedItemClick,
   cascading: _cascading = 'right-up',
@@ -46,8 +44,8 @@ export function AvatarGroup({
   const max = valueOrGetToGet(_max);
   const shape = valueOrGetToGet(_shape);
   const size = valueOrGetToGet(_size);
-  const count = valueOrGetToGet(_count);
   const className = valueOrGetToGet(args.className);
+  const children = valueOrGetToGet(_children);
 
   // 计算方向
   const direction = () => cascading().split('-')[0];
@@ -65,10 +63,11 @@ export function AvatarGroup({
     renderForEach<number, any>(
       function (callback) {
         const m = max(),
-          c = count();
+          vs = children(),
+          c = vs.length;
         const to = Math.min(m, c);
         for (let i = 0; i < to; i++) {
-          callback(getKeyAt(i), 1);
+          callback(vs[i], 1);
         }
         const r = c - m;
         if (r > 0) {
@@ -108,7 +107,7 @@ export function AvatarGroup({
             },
           });
         } else {
-          renderChildOf(et.getIndex, key);
+          Avatar(key);
         }
       },
       {

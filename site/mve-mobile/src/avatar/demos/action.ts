@@ -29,18 +29,12 @@ export default function ActionDemo() {
           AvatarGroup({
             max: 5,
             collapseAvatar: () => UserAddIcon(),
-            count: imageList.length,
-            getKeyAt(i) {
-              return i;
-            },
-            renderChildOf(getIndex, key) {
-              Avatar({
+            children: imageList.map((image) => {
+              return {
                 shape: 'circle',
-                image() {
-                  return imageList[getIndex()];
-                },
-              });
-            },
+                image,
+              };
+            }),
           });
         },
       });

@@ -6,7 +6,7 @@
 
 import { FPDomAttributes } from 'mve-dom';
 import { TNode } from '../common';
-import { GetValue, ValueOrGet } from 'wy-helper';
+import { GetValue, SetValue, ValueOrGet } from 'wy-helper';
 import { BadgeProps } from '../badge';
 import { ImageProps } from '../image';
 
@@ -87,7 +87,9 @@ export type AvatarGroupProps = {
    */
   onCollapsedItemClick?: (context: { e: MouseEvent }) => void;
 
-  count: ValueOrGet<number>;
-  getKeyAt(i: number): any;
-  renderChildOf(getIndex: GetValue<number>, key: any): void;
+  /**
+   * 数组,或者getArray
+   * @param renderAvatar
+   */
+  children: readonly AvatarProps[] | GetValue<readonly AvatarProps[]>;
 } & FPDomAttributes<'div'>;

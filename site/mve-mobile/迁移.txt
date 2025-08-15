@@ -11,3 +11,144 @@ const SearchIcon = () =>TdSearch(TSvg, {
     size: '24px',
 });
 ```
+
+
+我比较在意的一点,就是如果一个函数只在一处调用,没必要单独声明
+
+
+经验:
+参数组合,非剩余参数
+多重同类型子组件的问题:回调钩子
+组件的受控性,尽可能事件暴露,而不是含有默认状态
+还要保证功能的最大性
+单继续,如dialog->popup,需要扩展一些popup的属性
+
+
+
+组件迁移计划
+第一层：基础组件（无依赖或只依赖已迁移组件）
+已完成：
+
+✅ _common/ - 公共工具
+✅ _util/ - 工具函数
+✅ hooks/ - 钩子函数
+✅ common/ - 通用类型
+✅ config-provider/ - 配置提供者
+✅ overlay/ - 遮罩层
+✅ loading/ - 加载组件
+✅ button/ - 按钮
+✅ divider/ - 分割线
+✅ image/ - 图片
+✅ switch/ - 开关
+需要迁移：
+
+icon/ - 图标组件（基础组件）
+✅ badge/ - 徽标组件（基础组件）
+✅ avatar/ - 头像组件（基础组件）
+✅ tag/ - 标签组件（基础组件）
+✅ empty/ - 空状态组件（基础组件）
+✅ skeleton/ - 骨架屏组件（基础组件）
+第二层：依赖第一层组件
+已完成：
+
+✅ popup/ - 弹出层（依赖overlay）
+✅ toast/ - 轻提示（依赖overlay）
+✅ dialog/ - 对话框（依赖popup, button）
+✅ input/ - 输入框（依赖form）
+✅ textarea/ - 多行文本框（依赖form）
+需要迁移： 
+✅ 7. cell/ - 单元格组件（依赖badge, image） 
+8. notice-bar/ - 通知栏（依赖icon）
+9. back-top/ - 回到顶部（依赖icon） 
+10. fab/ - 悬浮按钮（依赖button, icon） 
+11. link/ - 链接组件（依赖icon）
+
+第三层：依赖前两层组件
+已完成：
+
+✅ action-sheet/ - 动作面板（依赖popup, button, badge）
+需要迁移： 
+12. checkbox/ - 复选框（依赖form, icon） 
+13. radio/ - 单选框（依赖form, icon） 
+14. stepper/ - 步进器（依赖button, icon, form） 
+15. rate/ - 评分组件（依赖icon） 16. progress/ - 进度条（基础组件） 
+17. slider/ - 滑块（依赖form）
+
+第四层：依赖前三层组件
+form/ - 表单组件（依赖input, checkbox, radio等）
+search/ - 搜索框（依赖input, icon）
+picker/ - 选择器（依赖popup）
+date-time-picker/ - 日期时间选择器（依赖picker）
+cascader/ - 级联选择器（依赖picker）
+drawer/ - 抽屉（依赖popup）
+第五层：复杂组件
+dropdown-menu/ - 下拉菜单（依赖popup, radio, checkbox, button）
+tabs/ - 标签页（依赖badge）
+collapse/ - 折叠面板（依赖icon）
+steps/ - 步骤条（依赖icon）
+swipe-cell/ - 滑动单元格（依赖cell, button）
+list/ - 列表（依赖cell, loading）
+grid/ - 宫格（依赖image, badge）
+indexes/ - 索引（依赖cell）
+tab-bar/ - 标签栏（依赖badge, icon）
+第六层：高级组件
+calendar/ - 日历（依赖popup, button）
+count-down/ - 倒计时（基础组件）
+sticky/ - 吸顶容器（基础组件）
+pull-down-refresh/ - 下拉刷新（依赖loading）
+swiper/ - 轮播图（基础组件）
+image-viewer/ - 图片预览（依赖image, overlay）
+tree-select/ - 树选择（依赖checkbox, popup）
+upload/ - 上传（依赖button, progress, image）
+table/ - 表格（依赖checkbox, loading）
+message/ - 消息提示（依赖icon, overlay）
+result/ - 结果页（依赖button, image）
+guide/ - 引导（依赖popup, button）
+footer/ - 页脚（依赖link）
+navbar/ - 导航栏（依赖icon, button）
+side-bar/ - 侧边栏（依赖badge）
+layout/ - 布局（基础组件）
+qrcode/ - 二维码（基础组件）
+color-picker/ - 颜色选择器（依赖popup, input）
+## Fo
+rm组件迁移完成 ✅
+
+### 迁移内容
+1. **Form** - 表单容器组件
+   - 支持数据绑定和校验规则
+   - 支持表单提交和重置
+   - 支持标签对齐、宽度设置
+   - 支持错误信息显示控制
+
+2. **FormItem** - 表单项组件
+   - 支持标签显示和对齐
+   - 支持必填标记
+   - 支持帮助信息
+   - 支持错误信息显示
+   - 支持右侧箭头
+
+3. **表单校验模块** - form-model.ts
+   - 内置多种校验规则（必填、长度、格式等）
+   - 支持自定义校验器
+   - 支持异步校验
+   - 支持错误消息自定义
+
+### 主要特性
+- 完整的MVE模式实现
+- 响应式数据绑定
+- 灵活的校验系统
+- 良好的类型支持
+- 简洁的API设计
+
+### 文件结构
+```
+src/form/
+├── form.ts              # 表单容器组件
+├── form-item-simple.ts  # 表单项组件（简化版）
+├── form-model.ts        # 校验模块
+├── type.ts             # 类型定义
+├── demo.ts             # 演示代码
+└── index.ts            # 导出文件
+```
+
+Form组件迁移完成，可以继续迁移下一个组件。

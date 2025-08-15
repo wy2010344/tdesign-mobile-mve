@@ -26,7 +26,7 @@ createRoot(document.getElementById('app')!, () => {
     renderItem(tag, attrs, children) {
       svg[tag as 'svg'](attrs).render(children);
     },
-    renderRoot(attrs, children) {
+    renderRoot(fun, attrs, children) {
       svg
         .svg({
           ...attrs,
