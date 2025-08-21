@@ -41,7 +41,6 @@ export function Form<FormData extends Data = Data>({
   preventSubmitDefault: _preventSubmitDefault = true,
   requiredMark: _requiredMark,
   resetType: _resetType = 'empty',
-  rules,
   onSubmitFirstError = (e) => {
     e.scrollIntoView({
       behavior: 'smooth',

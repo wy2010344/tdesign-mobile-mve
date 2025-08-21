@@ -1,6 +1,7 @@
 <template>
   <div style="padding: 0 16px">
     <t-swiper
+      direction="vertical"
       :navigation="{ type: 'dots', placement: 'outside' }"
       :autoplay="false"
       @click="handleClick"

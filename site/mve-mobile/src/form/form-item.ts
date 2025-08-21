@@ -234,7 +234,7 @@ export function FormItem({
       renderIfP(arrow, function () {
         TdChevronRight(TSvg, {
           size: '24px',
-          style: { color: 'rgba(0, 0, 0, .4)' },
+          s_color: 'rgba(0, 0, 0, .4)',
         });
       });
     },
