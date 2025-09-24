@@ -58,7 +58,7 @@ icon/ - 图标组件（基础组件）
 ✅ textarea/ - 多行文本框（依赖form）
 需要迁移： 
 ✅ 7. cell/ - 单元格组件（依赖badge, image） 
-8. notice-bar/ - 通知栏（依赖icon）
+✅ 8. notice-bar/ - 通知栏（依赖icon）
 9. back-top/ - 回到顶部（依赖icon） 
 10. fab/ - 悬浮按钮（依赖button, icon） 
 11. link/ - 链接组件（依赖icon）

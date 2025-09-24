@@ -1,6 +1,6 @@
-import { TNode } from '../common';
 import { EmptyFun, run, ValueOrGet } from 'wy-helper';
 import { renderTextContent, renderHtmlContent } from 'mve-dom';
+import { TNode } from '../common';
 
 export function renderTNode(
   children: TNode | undefined,

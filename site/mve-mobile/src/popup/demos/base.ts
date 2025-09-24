@@ -1,8 +1,8 @@
 import { fdom } from 'mve-dom';
 import { createSignal } from 'wy-helper';
+import { css } from 'wy-dom-helper';
 import { Button } from '../../button';
 import { Popup } from '../index';
-import { css } from 'wy-dom-helper';
 
 export default function BaseDemo() {
   const visible = createSignal(false);

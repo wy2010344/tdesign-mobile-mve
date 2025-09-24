@@ -1,9 +1,11 @@
+/* eslint-disable import/order */
 import { Navbar } from '../index';
 import demoBlock from '../../../demo-block';
 import { TdChevronLeft, TdClose, TdEllipsis } from 'mve-icons/td';
 import { TSvg } from '../../../svg';
 import { fdom } from 'mve-dom';
 import { Divider } from '../../divider';
+
 export default function () {
   demoBlock({
     title: '01 组件类型',

@@ -1,13 +1,14 @@
 import { fdom, renderPortal } from 'mve-dom';
 import { valueOrGetToGet, EmptyFun, FalseType } from 'wy-helper';
+import { renderIf, renderIfP, renderOneP } from 'mve-helper';
+import { cns, hookLockScroll, hookTransition } from 'mve-dom-helper';
+import { TdClose } from 'mve-icons/td';
 import { PopupProps } from './type';
 import { renderTNode } from '../_util/parseTNode';
 import { usePrefixClass } from '../hooks/useClass';
-import { renderIf, renderIfP, renderOneP } from 'mve-helper';
 import { Overlay } from '../overlay';
-import { cns, hookLockScroll, hookTransition } from 'mve-dom-helper';
-import { TdClose } from 'mve-icons/td';
 import { TSvg } from '../../svg';
+
 function renderOrPortal(fun: EmptyFun, target?: HTMLElement | FalseType) {
   if (target) {
     return renderPortal(target, fun);

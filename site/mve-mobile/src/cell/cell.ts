@@ -3,6 +3,7 @@ import { valueOrGetToGet, memo, mergeSet, createSignal } from 'wy-helper';
 import { renderIf, renderOne } from 'mve-helper';
 import { CellProps } from './type';
 import { renderTNode } from '../_util/parseTNode';
+import { preventTextSelectionStyles } from '../_util/preventTextSelection';
 import { TdChevronRight } from 'mve-icons/td';
 import { TSvg } from '../../svg';
 import { usePrefixClass } from '../hooks/useClass';
@@ -141,12 +142,13 @@ export function Cell({
       if (allowHover() && !disabled() && isHover.get()) {
         classes.push(`${cellClass}--hover`);
       }
-      // TODO: 添加hover效果的类名处理
       const n = className();
       if (n) classes.push(n);
       return classes.join(' ');
     },
     onClick: handleClick,
+    // 防止文字选择
+    ...preventTextSelectionStyles,
     plugin: mergeSet(pluginHover(isHover), args.plugin),
     children() {
       renderLeft();
