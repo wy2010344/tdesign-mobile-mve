@@ -9,9 +9,10 @@ exports[`Textarea > Textarea autosizeVue demo works fine 1`] = `
     class="t-textarea__wrapper"
   >
     <textarea
-      class="t-textarea__wrapper-inner"
+      class="t-textarea__wrapper-inner t-textarea__placeholder"
       name="标签文字"
       placeholder="请输入文字"
+      style="caret-color: #0052d9;"
     />
     <!---->
   </div>
@@ -28,9 +29,10 @@ exports[`Textarea > Textarea baseVue demo works fine 1`] = `
     class="t-textarea__wrapper"
   >
     <textarea
-      class="t-textarea__wrapper-inner"
+      class="t-textarea__wrapper-inner t-textarea__placeholder"
       name=""
       placeholder="请输入文字"
+      style="caret-color: #0052d9;"
     />
     <!---->
   </div>
@@ -59,9 +61,10 @@ exports[`Textarea > Textarea cardVue demo works fine 1`] = `
         class="t-textarea__wrapper"
       >
         <textarea
-          class="t-textarea__wrapper-inner"
+          class="t-textarea__wrapper-inner t-textarea__placeholder"
           name=""
           placeholder="请输入文字"
+          style="caret-color: #0052d9;"
         />
         <div
           class="t-textarea__indicator"
@@ -95,9 +98,10 @@ exports[`Textarea > Textarea cardVue demo works fine 1`] = `
         class="t-textarea__wrapper"
       >
         <textarea
-          class="t-textarea__wrapper-inner"
+          class="t-textarea__wrapper-inner t-textarea__placeholder"
           name=""
           placeholder="请输入文字"
+          style="caret-color: #0052d9;"
         />
         <div
           class="t-textarea__indicator"
@@ -132,9 +136,10 @@ exports[`Textarea > Textarea customVue demo works fine 1`] = `
       class="t-textarea__wrapper"
     >
       <textarea
-        class="t-textarea__wrapper-inner"
+        class="t-textarea__wrapper-inner t-textarea__placeholder"
         name=""
         placeholder="请输入文字"
+        style="caret-color: #0052d9;"
       />
       <div
         class="t-textarea__indicator"
@@ -161,10 +166,11 @@ exports[`Textarea > Textarea disabledVue demo works fine 1`] = `
     class="t-textarea__wrapper"
   >
     <textarea
-      class="t-textarea__wrapper-inner t-textarea--disabled"
+      class="t-textarea__wrapper-inner t-textarea__placeholder t-textarea--disabled"
       disabled=""
       name=""
       placeholder="请输入文字"
+      style="caret-color: #0052d9;"
     />
     <!---->
   </div>
@@ -185,9 +191,10 @@ exports[`Textarea > Textarea labelVue demo works fine 1`] = `
     class="t-textarea__wrapper"
   >
     <textarea
-      class="t-textarea__wrapper-inner"
+      class="t-textarea__wrapper-inner t-textarea__placeholder"
       name="标签文字"
       placeholder="请输入文字"
+      style="caret-color: #0052d9;"
     />
     <!---->
   </div>
@@ -207,9 +214,10 @@ exports[`Textarea > Textarea maxcharacterVue demo works fine 1`] = `
     class="t-textarea__wrapper"
   >
     <textarea
-      class="t-textarea__wrapper-inner"
+      class="t-textarea__wrapper-inner t-textarea__placeholder"
       name="标签文字"
       placeholder="请输入文字"
+      style="caret-color: #0052d9;"
     />
     <div
       class="t-textarea__indicator"
@@ -234,9 +242,10 @@ exports[`Textarea > Textarea maxlengthVue demo works fine 1`] = `
     class="t-textarea__wrapper"
   >
     <textarea
-      class="t-textarea__wrapper-inner"
+      class="t-textarea__wrapper-inner t-textarea__placeholder"
       name="标签文字"
       placeholder="请输入文字"
+      style="caret-color: #0052d9;"
     />
     <div
       class="t-textarea__indicator"
@@ -292,9 +301,10 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
           class="t-textarea__wrapper"
         >
           <textarea
-            class="t-textarea__wrapper-inner"
+            class="t-textarea__wrapper-inner t-textarea__placeholder"
             name=""
             placeholder="请输入文字"
+            style="caret-color: #0052d9;"
           />
           <!---->
         </div>
@@ -332,9 +342,10 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
           class="t-textarea__wrapper"
         >
           <textarea
-            class="t-textarea__wrapper-inner"
+            class="t-textarea__wrapper-inner t-textarea__placeholder"
             name="标签文字"
             placeholder="请输入文字"
+            style="caret-color: #0052d9;"
           />
           <!---->
         </div>
@@ -367,9 +378,10 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
           class="t-textarea__wrapper"
         >
           <textarea
-            class="t-textarea__wrapper-inner"
+            class="t-textarea__wrapper-inner t-textarea__placeholder"
             name="标签文字"
             placeholder="请输入文字"
+            style="caret-color: #0052d9;"
           />
           <!---->
         </div>
@@ -406,9 +418,10 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
           class="t-textarea__wrapper"
         >
           <textarea
-            class="t-textarea__wrapper-inner"
+            class="t-textarea__wrapper-inner t-textarea__placeholder"
             name="标签文字"
             placeholder="请输入文字"
+            style="caret-color: #0052d9;"
           />
           <div
             class="t-textarea__indicator"
@@ -441,9 +454,10 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
           class="t-textarea__wrapper"
         >
           <textarea
-            class="t-textarea__wrapper-inner"
+            class="t-textarea__wrapper-inner t-textarea__placeholder"
             name="标签文字"
             placeholder="请输入文字"
+            style="caret-color: #0052d9;"
           />
           <div
             class="t-textarea__indicator"
@@ -490,10 +504,11 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
           class="t-textarea__wrapper"
         >
           <textarea
-            class="t-textarea__wrapper-inner t-textarea--disabled"
+            class="t-textarea__wrapper-inner t-textarea__placeholder t-textarea--disabled"
             disabled=""
             name=""
             placeholder="请输入文字"
+            style="caret-color: #0052d9;"
           />
           <!---->
         </div>
@@ -540,9 +555,10 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
             class="t-textarea__wrapper"
           >
             <textarea
-              class="t-textarea__wrapper-inner"
+              class="t-textarea__wrapper-inner t-textarea__placeholder"
               name=""
               placeholder="请输入文字"
+              style="caret-color: #0052d9;"
             />
             <div
               class="t-textarea__indicator"
@@ -576,9 +592,10 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
             class="t-textarea__wrapper"
           >
             <textarea
-              class="t-textarea__wrapper-inner"
+              class="t-textarea__wrapper-inner t-textarea__placeholder"
               name=""
               placeholder="请输入文字"
+              style="caret-color: #0052d9;"
             />
             <div
               class="t-textarea__indicator"
@@ -633,9 +650,10 @@ exports[`Textarea > Textarea mobileVue demo works fine 1`] = `
             class="t-textarea__wrapper"
           >
             <textarea
-              class="t-textarea__wrapper-inner"
+              class="t-textarea__wrapper-inner t-textarea__placeholder"
               name=""
               placeholder="请输入文字"
+              style="caret-color: #0052d9;"
             />
             <div
               class="t-textarea__indicator"

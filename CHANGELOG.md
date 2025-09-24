@@ -5,6 +5,26 @@ toc: false
 spline: explain
 ---
 
+## 🌈 1.10.2 `2025-08-22` 
+### 🚀 Features
+- `Indexes`: 新增 `current` 属性，支持受控与非受控使用，用于自定义索引列表激活项 @Wesley-0808 ([#1987](https://github.com/Tencent/tdesign-mobile-vue/pull/1987))
+### 🐞 Bug Fixes
+- `ImageViwer`: 修复背景色错误，导航背景色固定为 `#000`，遮罩背景色使用 `@mask-active` @anlyyao ([#1984](https://github.com/Tencent/tdesign-mobile-vue/pull/1984))
+- `Textarea`: 修复 `--td-textarea-placeholder-color` 无效 @anlyyao ([#2000](https://github.com/Tencent/tdesign-mobile-vue/pull/2000))
+- `Picker`: 修复初始值为 `0` 且禁用时，`confirm` 事件返回值错误 @anlyyao ([#1999](https://github.com/Tencent/tdesign-mobile-vue/pull/1999))
+- `List`: 修复 `asyncLoading` 为 `slot/function` 时无效
+- `Textarea`: 修复 `autosize` 属性类型报错
+
+## 🌈 1.10.1 `2025-08-08` 
+### 🚀 Features
+- `Tabs`: 优化首次加载时底部激活线条动画 @novlan1 ([#1962](https://github.com/Tencent/tdesign-mobile-vue/pull/1962))
+- `Form`: 
+  - 新增 `requiredMarkPosition`，可定义必填符号的位置 @Wesley-0808 ([#1969](https://github.com/Tencent/tdesign-mobile-vue/pull/1969))
+  - 校验规则 `pattern` 字段支持字符串类型 @novlan1 ([#1972](https://github.com/Tencent/tdesign-mobile-vue/pull/1972))
+- `Textarea`: 新增 `cursorColor` 属性 @anlyyao ([#1970](https://github.com/Tencent/tdesign-mobile-vue/pull/1970))
+### 🐞 Bug Fixes
+- `NoticeBar`: 修复 `warning` 和 `error` 主题默认图标错误 @12um18ara ([#1955](https://github.com/Tencent/tdesign-mobile-vue/pull/1955))
+
 ## 🌈 1.10.0 `2025-07-25` 
 ### 🚀 Features
 - `QRCode`: 新增 `QRcode` 二维码组件  @Wesley-0808 ([#1921](https://github.com/Tencent/tdesign-mobile-vue/pull/1921))

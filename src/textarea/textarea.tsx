@@ -31,6 +31,7 @@ export default defineComponent({
     ]);
     const textareaInnerClasses = computed(() => [
       `${textareaClass.value}__wrapper-inner`,
+      `${textareaClass.value}__placeholder`,
       {
         [`${textareaClass.value}--disabled`]: isDisabled.value,
         [`${textareaClass.value}--readonly`]: props.readonly,
@@ -139,7 +140,7 @@ export default defineComponent({
       const textareaAttrs = {
         ref: textareaRef,
         class: textareaInnerClasses.value,
-        style: textareaStyle.value,
+        style: { ...textareaStyle.value, caretColor: props.cursorColor },
         value: innerValue.value,
         name: props.name,
         // maxlength: props.maxlength,
