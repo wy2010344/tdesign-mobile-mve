@@ -9,11 +9,9 @@ export default function MaxlengthDemo() {
     children() {
       Textarea({
         model: value,
-        textAreaProps: {
-          attrs(m) {
-            m.name = '标签文字';
-            m.placeholder = '请输入文字';
-          },
+        attrs(m) {
+          m.name = '标签文字';
+          m.placeholder = '请输入文字';
         },
         maxAsLength: true,
         label: '标签文字',

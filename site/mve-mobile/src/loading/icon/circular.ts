@@ -1,4 +1,4 @@
-import { fdom, fsvg, msvg, svg } from 'mve-dom';
+import { fdom, fsvg, ksvg, svg } from 'mve-dom';
 import { version } from 'os';
 import { cns } from 'wy-dom-helper';
 import { addEffect } from 'wy-helper';
@@ -6,7 +6,7 @@ import circleAdapter from '../../_common/js/loading/circle-adapter'; // @ts-igno
 
 export default function ({ pause, duration, reverse }: { pause(): boolean; duration(): number; reverse(): boolean }) {
   const classPrefix = 't';
-  msvg.svg({
+  ksvg.svg({
     attrs(m) {
       m.viewBox = '0 0 14 14';
       m.width = '1em';

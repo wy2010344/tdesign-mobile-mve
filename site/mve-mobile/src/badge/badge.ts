@@ -1,4 +1,4 @@
-import { fdom, mdom } from 'mve-dom';
+import { fdom, kdom } from 'mve-dom';
 import { valueOrGetToGet, memo } from 'wy-helper';
 import { renderIf } from 'mve-helper';
 import { BadgeProps } from './type';
@@ -94,7 +94,7 @@ export function Badge({
   // 渲染徽标
   const renderBadge = () => {
     renderIf(isShowBadge, function () {
-      mdom.div({
+      kdom.div({
         attrs(m) {
           const currentDot = dot();
           const classes = [

@@ -1,4 +1,4 @@
-import { fdom, mdom } from 'mve-dom';
+import { fdom, kdom } from 'mve-dom';
 import { valueOrGetToGet } from 'wy-helper';
 import { AvatarProps } from './type';
 import { AvatarGroupContext } from './avatar-group';
@@ -96,7 +96,7 @@ export function Avatar({
             children() {
               // 如果有徽标属性，这里应该包装Badge组件
               // 简化实现，直接渲染头像
-              mdom.div({
+              kdom.div({
                 attrs(m) {
                   const currentSize = size();
                   const currentShape = shape();

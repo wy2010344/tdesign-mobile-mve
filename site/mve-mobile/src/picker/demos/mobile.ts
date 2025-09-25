@@ -1,8 +1,8 @@
 import { fdom } from 'mve-dom';
 import { BasePickerDemo } from './base';
-import { WithTitlePickerDemo } from './with-title';
 import { AreaPickerDemo } from './area';
 import demoBlock from '../../../demo-block';
+import { CustomHeight } from './customHeight';
 /**
  * Picker 组件移动端演示页面
  */
@@ -25,11 +25,10 @@ export default function PickerMobileDemo() {
         },
       });
 
-      return;
       demoBlock({
         title: '02 组件样式',
         children() {
-          WithTitlePickerDemo();
+          CustomHeight();
         },
       });
     },

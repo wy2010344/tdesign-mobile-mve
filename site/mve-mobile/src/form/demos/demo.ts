@@ -165,7 +165,10 @@ export default function FormDemo() {
             },
             children() {
               Textarea({
-                placeholder: '请输入描述信息',
+                attrs(m) {
+                  console.log('dd', m);
+                  m.placeholder = '请输入描述信息';
+                },
                 model: createSubSetObject(formData, 'description'),
               });
             },
@@ -182,7 +185,7 @@ export default function FormDemo() {
                 children: '提交',
               });
               Button({
-                type: 'submit',
+                type: 'reset',
                 theme: 'default',
                 size: 'large',
                 children: '重置',

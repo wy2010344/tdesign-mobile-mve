@@ -1,4 +1,4 @@
-import { fdom, mdom, renderTextContent } from 'mve-dom';
+import { fdom, kdom, renderTextContent } from 'mve-dom';
 import { valueOrGetToGet, createSignal, addEffect, emptyFun } from 'wy-helper';
 import { TextareaProps } from './type';
 import { renderTNode } from '../_util/parseTNode';
@@ -26,10 +26,10 @@ export function Textarea({
   autofocus,
   autosize: _autosize = false,
   indicator: _indicator = false,
-  textAreaProps,
+  wrapperProps,
   label,
   className: _className,
-  ...args
+  ...textAreaProps
 }: TextareaProps) {
   const textareaClass = usePrefixClass('textarea');
   // 转换为响应式getter函数
@@ -86,7 +86,7 @@ export function Textarea({
     }
   };
   return fdom.div({
-    ...args,
+    ...wrapperProps,
     className() {
       const classes = [textareaClass, `${textareaClass}--layout-${layout()}`];
       if (bordered()) {
@@ -109,12 +109,12 @@ export function Textarea({
         className: `${textareaClass}__wrapper`,
         children() {
           // 渲染文本框
-          const el = renderInput(
+          const node = renderInput(
             model.get,
             (value) => {
               model.set(getValueByLimitNumber(value));
             },
-            mdom.textarea({
+            kdom.textarea({
               ...textAreaProps,
               attrsNoObserver: false,
               attrs(m) {
@@ -127,26 +127,23 @@ export function Textarea({
                 );
                 m.disabled = disabled();
                 addEffect(() => {
-                  adjustTextareaHeight(el as HTMLTextAreaElement);
-                });
-              },
-              plugin(el) {
-                textAreaProps?.plugin?.(el);
-                // 初始化高度
-                if (autofocus) {
-                  addEffect(() => {
-                    el.focus();
-                  });
-                }
-
-                hookTrackSignal(model.get, function (value) {
-                  addEffect(() => {
-                    adjustTextareaHeight(el);
-                  });
+                  adjustTextareaHeight(node as HTMLTextAreaElement);
                 });
               },
             }),
           );
+          // 初始化高度
+          if (autofocus) {
+            //这里会下一周期执行,感觉不美好...
+            addEffect(() => {
+              node.focus();
+            });
+          }
+          hookTrackSignal(model.get, function (value) {
+            addEffect(() => {
+              adjustTextareaHeight(node as HTMLTextAreaElement);
+            });
+          });
           // 渲染字符计数器
           renderIfP(
             () => indicator() && max(),

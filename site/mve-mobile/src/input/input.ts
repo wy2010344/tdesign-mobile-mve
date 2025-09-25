@@ -37,7 +37,7 @@ export function Input({
   tips,
   extra,
   format,
-  inputProps,
+  wrapperProps,
   className: _className,
   triggerTime,
   ...args
@@ -66,7 +66,7 @@ export function Input({
   const focused = createSignal(false);
   const renderType = createSignal(type());
 
-  const readonly = valueOrGetToGet(inputProps?.readOnly || false);
+  const readonly = valueOrGetToGet(args?.readOnly || false);
 
   // 计算是否显示清除按钮
   const showClear = () => {
@@ -136,8 +136,8 @@ export function Input({
                 },
 
                 fdom.input({
+                  ...args,
                   type: renderType.get,
-                  ...inputProps,
                   'css_td-input-cursor-color': cursorColor,
                   className() {
                     const classes = [
@@ -150,14 +150,14 @@ export function Input({
                   },
                   onFocus(e) {
                     focused.set(true);
-                    inputProps?.onFocus?.(e);
+                    args?.onFocus?.(e);
                   },
                   onBlur(e) {
                     focused.set(false);
-                    inputProps?.onBlur?.(e);
+                    args?.onBlur?.(e);
                   },
                   plugin: (el: HTMLInputElement) => {
-                    inputProps?.plugin?.(el);
+                    args?.plugin?.(el);
                     // 自动聚焦
                     if (autofocus) {
                       addEffect(() => {

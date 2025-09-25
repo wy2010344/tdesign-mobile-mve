@@ -8,12 +8,9 @@ export default function DisabledDemo() {
       Textarea({
         className: s,
         label: '标签文字',
-        placeholder: '',
-        textAreaProps: {
-          attrs(m) {
-            m.placeholder = '请输入文字';
-            m.value = '不可编辑文字';
-          },
+        attrs(m) {
+          m.placeholder = '请输入文字';
+          m.value = '不可编辑文字';
         },
         disabled: true,
       });

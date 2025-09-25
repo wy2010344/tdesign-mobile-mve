@@ -7,11 +7,9 @@ export default function LabelDemo() {
     children() {
       Textarea({
         className: s,
-        textAreaProps: {
-          attrs(m) {
-            m.name = '标签文字';
-            m.placeholder = '请输入文字';
-          },
+        attrs(m) {
+          m.name = '标签文字';
+          m.placeholder = '请输入文字';
         },
         label: '标签文字',
       });

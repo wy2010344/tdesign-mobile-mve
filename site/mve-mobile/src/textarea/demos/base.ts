@@ -7,7 +7,9 @@ export default function BaseDemo() {
     children() {
       Textarea({
         className: s,
-        placeholder: '请输入文字',
+        attrs(m) {
+          m.placeholder = '请输入文字';
+        },
       });
     },
   });

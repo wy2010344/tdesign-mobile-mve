@@ -34,19 +34,19 @@ export default function MultipleDemo() {
             title: '单行标题',
             description: '一段很长很长的内容文字',
             arrow: true,
-            note: () => Badge({ count: 16 }),
+            children: () => Badge({ count: 16 }),
           });
 
           Cell({
             title: '单行标题',
             description: '一段很长很长的内容文字',
-            note: () => Switch({ defaultValue: true }),
+            children: () => Switch({ value: true }),
           });
 
           Cell({
             title: '单行标题',
             description: '一段很长很长的内容文字',
-            note: '辅助信息',
+            children: '辅助信息',
             arrow: true,
           });
 

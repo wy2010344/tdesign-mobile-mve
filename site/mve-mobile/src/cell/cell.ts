@@ -23,7 +23,6 @@ export function Cell({
   allowHover: _allowHover = false,
   image,
   leftIcon,
-  note,
   required: _required = false,
   rightIcon,
   title,
@@ -155,12 +154,11 @@ export function Cell({
       renderTitle();
 
       // 渲染note内容
-      const noteContent = note || children;
-      if (noteContent) {
+      if (typeof children != 'undefined') {
         fdom.div({
           className: `${cellClass}__note`,
           children() {
-            renderTNode(noteContent);
+            renderTNode(children);
           },
         });
       }

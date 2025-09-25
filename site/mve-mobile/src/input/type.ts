@@ -104,8 +104,8 @@ export type InputProps = {
   type?: ValueOrGet<'text' | 'email' | 'number' | 'url' | 'tel' | 'password' | 'search' | 'submit' | 'hidden'>;
 
   model?: StoreRef<string>;
-  inputProps?: Omit<FPDomAttributes<'input'>, 'maxLength'>;
+  wrapperProps?: FPDomAttributes<'div'>;
   children?: TNode;
-} & FPDomAttributes<'div'>;
+} & Omit<FPDomAttributes<'input'>, 'maxLength' | 'max'>;
 
 export type InputFormatType = (value: string) => string;

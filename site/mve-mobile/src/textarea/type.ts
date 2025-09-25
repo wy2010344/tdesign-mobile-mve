@@ -3,7 +3,7 @@
 /**
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
-import { Plugin, FPDomAttributes, MDomAttributes } from 'mve-dom';
+import { Plugin, FPDomAttributes, MDomAttributes, FDomAttributes } from 'mve-dom';
 import { StoreRef, ValueOrGet } from 'wy-helper';
 import { TNode } from '../common';
 import { BDomEvent, DomElement, FDomAttribute } from 'wy-dom-helper';
@@ -56,6 +56,7 @@ export type TextareaProps = {
    */
   maxAsLength?: ValueOrGet<boolean>;
 
-  textAreaProps?: MDomAttributes<'textarea'>;
+  className?: string;
+  wrapperProps?: Omit<FPDomAttributes<'div'>, 'className'>;
   model?: StoreRef<string>;
-} & FPDomAttributes<'div'>;
+} & MDomAttributes<'textarea'>;

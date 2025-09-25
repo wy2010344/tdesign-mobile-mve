@@ -30,18 +30,18 @@ export default function SingleDemo() {
             title: '单行标题',
             arrow: true,
             allowHover: true,
-            note: () => Badge({ count: 16 }),
+            children: () => Badge({ count: 16 }),
           });
 
           Cell({
             title: '单行标题',
             allowHover: true,
-            note: () => Switch({ defaultValue: true }),
+            children: () => Switch({ value: true }),
           });
 
           Cell({
             title: '单行标题',
-            note: '辅助信息',
+            children: '辅助信息',
             arrow: true,
             allowHover: true,
           });

@@ -17,8 +17,6 @@ export type CellProps = {
   image?: string | TNode;
   /** 左侧图标，出现在单元格标题的左侧 */
   leftIcon?: TNode;
-  /** 和标题同行的说明文字 */
-  note?: TNode;
   /** 是否显示表单必填星号 */
   required?: ValueOrGet<boolean>;
   /** 最右侧图标 */
@@ -30,7 +28,7 @@ export type CellProps = {
   disabled?: ValueOrGet<boolean>;
   /** 子内容 */
   children?: TNode;
-} & FPDomAttributes<'div'>;
+} & Omit<FPDomAttributes<'div'>, 'title'>;
 
 export type CellGroupProps = {
   /** 是否显示组边框 */

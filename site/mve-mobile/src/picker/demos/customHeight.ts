@@ -6,12 +6,12 @@ import { Popup } from '../../popup';
 import { PickerValue, PickerColumn } from '../type';
 import { PickerItem } from '../picker-item';
 import { renderArray, renderOne } from 'mve-helper';
-import { toGetText } from 'wy-dom-helper';
+import { css, toGetText } from 'wy-dom-helper';
 
 /**
  * 地区联动选择器示例
  */
-export function AreaPickerDemo() {
+export function CustomHeight() {
   const visible = createSignal(false);
   const area = createSignal<
     | {
@@ -59,6 +59,7 @@ export function AreaPickerDemo() {
           const city = createSignal(n ? citys.indexOf(n.city) : 0);
           const subCity = createSignal(n ? subCities().indexOf(n.subCity) : 0);
           Picker({
+            className: cls,
             confirm: {
               onClick() {
                 area.set({
@@ -104,3 +105,8 @@ export function AreaPickerDemo() {
     },
   });
 }
+
+const cls = css`
+  --td-picker-item-height: 80px;
+  --td-picker-group-height: 400px;
+`;

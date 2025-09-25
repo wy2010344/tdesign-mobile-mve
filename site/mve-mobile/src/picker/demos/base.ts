@@ -5,7 +5,6 @@ import { Cell } from '../../cell';
 import { Popup } from '../../popup';
 import { PickerValue } from '../type';
 import { toGetText } from 'wy-dom-helper';
-import { PickerItemRange, PickerItemRangeCell } from '../picker-item';
 
 /**
  * 基础选择器示例
@@ -17,7 +16,8 @@ export function BasePickerDemo() {
 
   // 季节选择状态
   const seasonShow = createSignal(false);
-  const yearValue = createSignal(new Date().getFullYear());
+
+  const currentYear = createSignal(new Date().getFullYear());
   const seasonValue = createSignal<number>(0);
 
   // 城市选项
@@ -32,7 +32,6 @@ export function BasePickerDemo() {
   ];
 
   // 年份和季节选项
-  const currentYear = createSignal(new Date().getFullYear());
   const seasonOptions = [
     { label: '春', value: '春' },
     { label: '夏', value: '夏' },
@@ -57,7 +56,7 @@ export function BasePickerDemo() {
         arrow: true,
         title: '选择时间',
         note: toGetText(() => {
-          return yearValue.get() + ' ' + seasonOptions[seasonValue.get()].label;
+          return currentYear.get() + ' ' + seasonOptions[seasonValue.get()].label;
         }),
         onClick: () => seasonShow.set(true),
       });
@@ -83,43 +82,17 @@ export function BasePickerDemo() {
               },
             },
             renderColumns() {
-              PickerItemRange({
+              PickerItem({
                 value,
-                size: cityOptions.length,
-                rangePickerProps: {
-                  disabled(i) {
-                    return cityOptions[i].disabled;
-                  },
+                itemsCount: cityOptions.length,
+
+                disabled(i) {
+                  return cityOptions[i].disabled;
                 },
-                children(activeIndex) {
-                  cityOptions.forEach((city, i) => {
-                    PickerItemRangeCell({
-                      children: city.label,
-                      disabled: city.disabled,
-                      active() {
-                        return i == activeIndex();
-                      },
-                    });
-                  });
+                renderCell(i) {
+                  renderTextContent(cityOptions[i].label);
                 },
               });
-              // PickerItem({
-              //   value,
-              //   renderCell(i) {
-              //     const city = cityOptions[i];
-              //     renderTextContent(city.label);
-              //   },
-
-              //   centerPickerProps: {
-              //     disabled(i) {
-              //       return cityOptions[i].disabled;
-              //     },
-              //     circle: {
-              //       count: cityOptions.length,
-              //       baseIndex: 0,
-              //     },
-              //   },
-              // });
             },
           });
         },
@@ -154,15 +127,14 @@ export function BasePickerDemo() {
                   renderTextContent(i);
                 },
               });
-              PickerItemRange({
+              PickerItem({
                 value: season,
-                size: 4,
-                children() {
-                  seasonOptions.forEach((season) => {
-                    PickerItemRangeCell({
-                      children: season.label,
-                    });
-                  });
+                itemsCount: seasonOptions.length,
+                config: {
+                  type: 'range',
+                },
+                renderCell(i) {
+                  renderTextContent(seasonOptions[i].label);
                 },
               });
             },

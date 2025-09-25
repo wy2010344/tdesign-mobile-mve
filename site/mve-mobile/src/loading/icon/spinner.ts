@@ -1,10 +1,10 @@
-import { fdom, mdom } from 'mve-dom';
+import { fdom, kdom } from 'mve-dom';
 import { cns } from 'wy-dom-helper';
 
 export default function ({ pause, duration, reverse }: { pause(): boolean; duration(): number; reverse(): boolean }) {
   const classPrefix = 't';
 
-  mdom.span({
+  kdom.span({
     attrs(m) {
       m.className = `${classPrefix}-loading__spinner`;
       if (!pause()) {
