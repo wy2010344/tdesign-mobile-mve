@@ -64,6 +64,19 @@ export default ({ mode }) => {
         },
       },
     },
+    optimizeDeps: {
+      // 显式包含依赖，确保其被正确预构建
+      include: [
+        'wy-helper',
+        'wy-dom-helper',
+        'mve-core',
+        'mve-helper',
+        'mve-dom',
+        'mve-dom-helper',
+        'daisy-mobile-helper',
+        'history', // 确保 history 被正确预构建
+      ],
+    },
     plugins: [
       vue({
         template: {

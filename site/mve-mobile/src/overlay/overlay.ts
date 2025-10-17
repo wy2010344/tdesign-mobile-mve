@@ -1,8 +1,8 @@
 import { fdom } from 'mve-dom';
 import { valueOrGetToGet } from 'wy-helper';
+import { hookTransition } from 'mve-dom-helper';
 import { OverlayProps } from './type';
 import { usePrefixClass } from '../hooks/useClass';
-import { hookTransition } from 'mve-dom-helper';
 /**
  * Overlay 遮罩层组件
  * 创建一个遮罩层，用于强调特定的页面元素，并阻挡用户对其他页面元素进行操作
@@ -46,7 +46,7 @@ export function Overlay({
       return t.didShow() ? display() : 'none';
     },
     s_transitionDuration() {
-      return duration() + 'ms';
+      return `${duration()}ms`;
     },
     onTouchMove(e) {
       if (preventScrollThrough()) {

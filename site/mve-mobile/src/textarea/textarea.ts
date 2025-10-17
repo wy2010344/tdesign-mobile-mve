@@ -1,4 +1,4 @@
-import { fdom, kdom, renderTextContent } from 'mve-dom';
+import { fdom, zdom, renderTextContent } from 'mve-dom';
 import { valueOrGetToGet, createSignal, addEffect, emptyFun } from 'wy-helper';
 import { TextareaProps } from './type';
 import { renderTNode } from '../_util/parseTNode';
@@ -114,7 +114,7 @@ export function Textarea({
             (value) => {
               model.set(getValueByLimitNumber(value));
             },
-            kdom.textarea({
+            zdom.textarea({
               ...textAreaProps,
               attrsNoObserver: false,
               attrs(m) {

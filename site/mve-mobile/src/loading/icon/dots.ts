@@ -1,8 +1,8 @@
-import { fdom, kdom } from 'mve-dom';
+import { fdom, zdom } from 'mve-dom';
 
 export default function ({ pause, duration, reverse }: { pause(): boolean; duration(): number; reverse(): boolean }) {
   const loadingClass = 't-loading';
-  kdom.div({
+  zdom.div({
     attrs(m) {
       m.className = `${loadingClass}__dots`;
       if (pause()) {
@@ -17,7 +17,7 @@ export default function ({ pause, duration, reverse }: { pause(): boolean; durat
     },
     children() {
       for (let i = 0; i < 3; i++) {
-        kdom.div({
+        zdom.div({
           attrs(m) {
             m.className = `${loadingClass}__dot`;
             m.s_animationDuration = `${duration() / 1000}s`;

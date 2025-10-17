@@ -93,17 +93,18 @@
     "dayjs": "^1.10.7",
     "history": "^5.3.0",
     "lodash-es": "^4.17.21",
-    "mve-core": "file:.yalc/mve-core",
-    "mve-dom": "file:.yalc/mve-dom",
-    "mve-dom-helper": "file:.yalc/mve-dom-helper",
-    "mve-helper": "file:.yalc/mve-helper",
-    "mve-icons": "file:.yalc/mve-icons",
+    "mve-icons": "^6.0.0",
     "tdesign-icons-vue-next": "^0.4.1",
     "tinycolor2": "^1.6.0",
     "validator": "^13.5.1",
-    "wy-dom-helper": "file:.yalc/wy-dom-helper",
-    "wy-helper": "file:.yalc/wy-helper"
+    "mve-core": "workspace:*",
+    "mve-dom": "workspace:*",
+    "mve-dom-helper": "workspace:*",
+    "mve-helper": "workspace:*",
+    "wy-dom-helper": "workspace:*",
+    "wy-helper": "workspace:*"
   },
+  "packageManager": "pnpm@10.18.2+sha512.9fb969fa749b3ade6035e0f109f0b8a60b5d08a1a87fdf72e337da90dcc93336e2280ca4e44f2358a649b83c17959e9993e777c2080879f3801e6f0d999ad3dd",
   "peerDependencies": {
     "vue": "^3.2.6"
   },
