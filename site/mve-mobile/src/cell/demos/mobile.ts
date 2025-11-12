@@ -1,9 +1,9 @@
 import { fdom } from 'mve-dom';
+import { cns, css } from 'wy-dom-helper';
 import SingleDemo from './single';
 import MultipleDemo from './multiple';
 import GroupDemo from './group';
 import demoBlock from '../../../demo-block';
-import { cns, css } from 'wy-dom-helper';
 
 export default function CellDemos() {
   fdom.div({

@@ -1,8 +1,8 @@
 import { fdom } from 'mve-dom';
 import { createSignal, mergeSet, valueOrGetToGet } from 'wy-helper';
+import { renderIfP } from 'mve-helper';
 import pluginHover from '../hooks/useHover';
 import { getFormIsDisabled } from '../form';
-import { renderIfP } from 'mve-helper';
 import { ButtonProps } from './type';
 import { Loading } from '../loading';
 import { usePrefixClass } from '../hooks/useClass';
@@ -104,7 +104,7 @@ export function Button({
       if (children) {
         fdom.span({
           className: `${buttonClass}__content`,
-          children: children,
+          children,
         });
       }
 

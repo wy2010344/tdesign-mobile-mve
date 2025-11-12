@@ -3,6 +3,7 @@ import { valueOrGetToGet, memo } from 'wy-helper';
 import { renderIf } from 'mve-helper';
 import { BadgeProps } from './type';
 import { renderTNode } from '../_util/parseTNode';
+import { usePrefixClass } from '../hooks/useClass';
 // 工具函数：判断是否包含单位
 function hasUnit(unit: string): boolean {
   return (
@@ -48,8 +49,8 @@ export function Badge({
   // 设置默认值 - 直接在解构中设置，类似Vue的props默认值
 
   // 类名前缀
-  const badgeClass = 't-badge';
-  const classPrefix = 't';
+  const badgeClass = usePrefixClass('badge');
+  const classPrefix = usePrefixClass();
 
   // 转换为响应式getter函数 - 这是MVE的核心
   const color = valueOrGetToGet(_color);
@@ -150,7 +151,7 @@ export function Badge({
           renderTNode(children, function (children) {
             fdom.span({
               className: `${badgeClass}__content-text`,
-              children: children,
+              children,
             });
           });
         },
